@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="all" />
+
+	<title>Changelog - YiiMongoDbSuite Manual</title>
+	
+	<link rel="stylesheet" type="text/css" href="design/generic.css" media="all"  />
+	<link rel="stylesheet" type="text/css" href="design/print.css" media="print" />
+	<!--[if lte IE 6]><link rel="stylesheet" href="design/ie.css" type="text/css" /><![endif]-->	
+	<!--[if IE 7]><link rel="stylesheet" href="design/ie7.css" type="text/css" /><![endif]-->
+</head>
+<body>
+
+<div id="wrap">
+	<div id="header">
+		<h1>YiiMongoDbSuite Manual 1.3</h1>
+		<h2>Changelog</h2>
+		<p class="generated">@ 25.12.2010</p>
+		<p class="location"><a href="index.html"><strong>User manual</strong></a> &raquo; <a href="changelog.html">Changelog</a></p>
+	</div>
+	
+	<div id="content"><dl class="location"><dt><a href="index.html">Table of Contents</a><br/>2. Changelog</dt><dd class="prev">1. Introduction<br/><a href="introduction.html">&laquo; Previous</a></dd><dd class="next">3. Setup<br/><a href="setup.html">Next &raquo;</a></dd></dl>	<h1>2. Changelog</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This is the 1.3.x release (to be released)</p>
+
+<p>New features in 1.3.x</p>
+
+<ul>
+<li>Ability to set FSync and Safe flag on different scopes, see the "Write queries flags" documentation part</li>
+<li><strong>Ability to use efficent Cursors instead of raw array, returned by the findAll* methods</strong> see "Use Cursor Flag" documentation part</li>
+</ul>
+
+<p>New features in 1.3.2</p>
+
+<ul>
+<li>Fixed bug that find* methods don't accept criteria in array format</li>
+<li>Lazy loading/creating of embedded documents</li>
+<li>Little performance boost, save embedded documents configs in static array</li>
+</ul>
+
+<p>New features in 1.3.1</p>
+
+<ul>
+<li>Fixed few major bugs in EMongoCriteria class</li>
+<li><em>Bugfixes to criteria object had forced to change the criteria object creation from array, please see the updated doc for it</em></li>
+<li>Fixed bug that in massive assign way, embeded documnets always used only safe attributes</li>
+<li>Setup of PHPUnit testing framework</li>
+<li>Written test cases for EMongoDB class and EMongoCriteria class </li>
+</ul>
+
+<p>New features in 1.3</p>
+
+<ul>
+<li>MongoDB GridFS feature support, thanks to work of: Jose Martinez and Philippe Gaultier</li>
+</ul>
+
+<p>New features in 1.2.3</p>
+
+<ul>
+<li>Gii CRUD generator, now generates advanced search form in admin (like in regular Yii CRUD generator)</li>
+<li>Search form now supports comparsion operators ( > | &lt; | >= | &lt;= | &lt;> | != | == | = )</li>
+<li>In v1.2.2 all search attributes where treated as a string regex, now you can test numbers to, just juse comparsion operators, example:
+
+<ul>
+<li>search for '1234' will try to find a string matching regexp /1234/i (this will not work if field is numeric)</li>
+<li>search for '= 1234' will try to find numberic value 1234</li>
+<li>search for '>= 1234' will try to find any record with field greater or equals numeric value 1234 </li>
+</ul></li>
+</ul>
+
+<p>New features in 1.2.2</p>
+
+<ul>
+<li>Magic method search() delivered with every EMongoDocument object</li>
+<li>Gii CRUD generator now uses search method, to provide text search in admin view (by default using case-insensitive regexp)</li>
+<li>EMongoDocument search() method has one parameter:
+
+<ul>
+<li>$caseSensitive true|false, default to false, whathever to use case-sensitive string comparsion </li>
+</ul></li>
+</ul>
+
+<p>New features in 1.2.1</p>
+
+<ul>
+<li><strong>Support for generating CRUD for EMongoDocument models!</strong></li>
+<li>Few minor bug fixes</li>
+</ul>
+
+<p>New features in 1.2</p>
+
+<ul>
+<li>Support for using any other than _id field as a PK</li>
+<li>Better names scopes handling, support for default scope</li>
+<li><em>Support to have different models in single collection! see Multimodel collection topic</em></li>
+<li>Better memory management, now there is only one collection object instance, per model</li>
+</ul>
+
+<p>New features in 1.1</p>
+
+<ul>
+<li>automated efficent index definition for collections, per model</li>
+</ul>
+
+<p>New features in 1.0:</p>
+
+<ul>
+<li>Named scopes just like in AR</li>
+<li>Very easy to use criteria object, you don't have to create complex MongoDB query arrays!</li>
+<li>Better exeption handling</li>
+<li>A lot more PHPDocs in code </li>
+</ul>
+
+<p>Features:</p>
+
+<ul>
+<li>Support of using Class::model()->find / findAll / count / countByAttributes and other Yii ActiveRecord syntax</li>
+<li>Support of schema-less documents with Yii standard rules and validation features</li>
+<li>Endless Embedded/Nested document support (Embedded documents are their own Model class with their own rules and other methods.</li>
+<li>(almost, limited only by MongoDB 4MB limit of single document) endless document embedding/nesting</li>
+<li>Ready to go out-of-box <em>EFFICIENT</em> DataProvider, witch use native php db driver sort, limit and offset features for returning results!</li>
+<li>Records and embedded documents inherit from CModel, so you can use every class witch can handle of CModel (ie: Gii form generator)</li>
+<li>relation support <em>idea/concept/example</em></li>
+</ul>
+<dl class="location location-bottom"><dt>2. Changelog<br/><a href="index.html">Table of Contents</a></dt><dd class="prev"><a href="introduction.html">&laquo; Previous</a><br/>1. Introduction</dd><dd class="next"><a href="setup.html">Next &raquo;</a><br/>3. Setup</dd></dl>		</div>
+	
+	<div id="footer">
+		<p>Copyright &copy; <a href="http://www.cleverit.com.pl">2010 CleverIT</a></p>
+		<p>Available under the terms of license: <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation License 2.1</a></p>
+		<p>Generated by <strong>TypeFriendly 0.1.4</strong> by <a href="http://www.invenzzia.org/">Invenzzia</a></p>
+	</div>
+</div>
+
+</body>
+</html>

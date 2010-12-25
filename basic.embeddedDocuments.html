@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="all" />
+
+	<title>Embedded Documents - YiiMongoDbSuite Manual</title>
+	
+	<link rel="stylesheet" type="text/css" href="design/generic.css" media="all"  />
+	<link rel="stylesheet" type="text/css" href="design/print.css" media="print" />
+	<!--[if lte IE 6]><link rel="stylesheet" href="design/ie.css" type="text/css" /><![endif]-->	
+	<!--[if IE 7]><link rel="stylesheet" href="design/ie7.css" type="text/css" /><![endif]-->
+</head>
+<body>
+
+<div id="wrap">
+	<div id="header">
+		<h1>YiiMongoDbSuite Manual 1.3</h1>
+		<h2>Embedded Documents</h2>
+		<p class="generated">@ 25.12.2010</p>
+		<p class="location"><a href="index.html"><strong>User manual</strong></a> &raquo; <a href="basic.html">Basic Usage</a> &raquo; <a href="basic.embeddedDocuments.html">Embedded Documents</a></p>
+	</div>
+	
+	<div id="content"><dl class="location"><dt><a href="basic.html">4. Basic Usage</a><br/>4.3. Embedded Documents</dt><dd class="prev">4.2. Simple Embeded Document Model<br/><a href="basic.simpleEmbeddedDocument.html">&laquo; Previous</a></dd><dd class="next">4.4. Arrays<br/><a href="basic.arrays.html">Next &raquo;</a></dd></dl>	<h1>4.3. Embedded Documents</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><h2>Basic informations about embedded documents</h2>
+
+<h3>Must know:</h3>
+
+<ul>
+<li>For performance reasons all models of embedded documents should extend from <code>EMongoEmbeddedDocument</code> class</li>
+<li>But the above is not a must, things will still work if you define as embedded child classes of regular <code>EMongoDocument</code></li>
+<li>You can define as many embedded documents as you wish</li>
+<li>Every embedded document <strong>can contain</strong> embedded documents!</li>
+<li>The only limit for this mechanism is that serialized version (in raw array format) of whole document, must not extend the 4 MB size</li>
+<li>For documents bigger than 4 MB see the [GridFS Section][advanced.gridfs]</li>
+<li>Main difference between <code>EMongoDocument</code> and EMongoEmbeddedDocument` is that:
+
+<ul>
+<li>EMongoDocument extends from EMongoEmbeddedDocument</li>
+<li>EMongoDocument is equipped with all methods needed to save its contents into a MongoDB collection</li>
+<li>You cannot call ie <code>save()</code> method on a EMongoEmbeddedDocument</li>
+</ul></li>
+</ul>
+
+<h3>Defining embedded documents within document</h3>
+
+<p><strong>This applies to EMongoDocument and EMongoEmbeddedDocument</strong></p>
+
+<p>Just define the <code>embeddedDocuments()</code> method in yours model class, it should return array of
+simple key => value pairs.</p>
+
+<ul>
+<li>Array values are class names that will be used to instantinate embedded documents</li>
+<li>Array keys are treated as property names of given embedded document class </li>
+</ul>
+
+<p>example:</p>
+
+<pre class="php"><span style="color: #666666; font-style: italic;">// ...</span>
+<span style="color: #666666; font-style: italic;">// within model class</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> embeddedDocuments<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+        <span style="color: #0000ff;">'address'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'UserAddress'</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'some_other_field_name'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'AnyEMongoEmbeddedDocumentChildClass'</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// this will give you access to propeties of model:</span>
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">address</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">embeddedExampleField</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">some_other_field_name</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">embeddedExampleField</span><span style="color: #339933;">;</span></pre>
+
+<h3>How to force save of embedded document into collection</h3>
+
+<ul>
+<li>First we need to get the mongo collection object ie:
+
+<ul>
+<li><code>$collection = SomeModelClass::model()-&gt;getCollection();</code></li>
+<li><code>$collection = SomeModelClass::model()-&gt;getDb()-&gt;collectionName;</code></li>
+<li><code>$collection = Yii::app()-&gt;getComponent('mongodb')-&gt;getConnection()-&gt;collectionName;</code></li>
+</ul></li>
+<li>When we have our collection model, we now can force save of embedded document as a regular root document:
+
+<ul>
+<li><code>$collection-&gt;save($ourEmbeddedModel-&gt;toArray());</code></li>
+</ul></li>
+</ul>
+<dl class="location location-bottom"><dt>4.3. Embedded Documents<br/><a href="basic.html">4. Basic Usage</a></dt><dd class="prev"><a href="basic.simpleEmbeddedDocument.html">&laquo; Previous</a><br/>4.2. Simple Embeded Document Model</dd><dd class="next"><a href="basic.arrays.html">Next &raquo;</a><br/>4.4. Arrays</dd></dl>		</div>
+	
+	<div id="footer">
+		<p>Copyright &copy; <a href="http://www.cleverit.com.pl">2010 CleverIT</a></p>
+		<p>Available under the terms of license: <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation License 2.1</a></p>
+		<p>Generated by <strong>TypeFriendly 0.1.4</strong> by <a href="http://www.invenzzia.org/">Invenzzia</a></p>
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="all" />
+
+	<title>Setup - YiiMongoDbSuite Manual</title>
+	
+	<link rel="stylesheet" type="text/css" href="design/generic.css" media="all"  />
+	<link rel="stylesheet" type="text/css" href="design/print.css" media="print" />
+	<!--[if lte IE 6]><link rel="stylesheet" href="design/ie.css" type="text/css" /><![endif]-->	
+	<!--[if IE 7]><link rel="stylesheet" href="design/ie7.css" type="text/css" /><![endif]-->
+</head>
+<body>
+
+<div id="wrap">
+	<div id="header">
+		<h1>YiiMongoDbSuite Manual 1.3</h1>
+		<h2>Setup</h2>
+		<p class="generated">@ 25.12.2010</p>
+		<p class="location"><a href="index.html"><strong>User manual</strong></a> &raquo; <a href="setup.html">Setup</a></p>
+	</div>
+	
+	<div id="content"><dl class="location"><dt><a href="index.html">Table of Contents</a><br/>3. Setup</dt><dd class="prev">2. Changelog<br/><a href="changelog.html">&laquo; Previous</a></dd><dd class="next">4. Basic Usage<br/><a href="basic.html">Next &raquo;</a></dd></dl>	<h1>3. Setup</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>In your main configuration file, witch is by default: <code>protected/config/main.php</code> config file.</p>
+
+<p>Add the following to the file:</p>
+
+<pre class="php"><span style="color: #0000ff;">'import'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+    <span style="color: #666666; font-style: italic;">// ...</span>
+    <span style="color: #0000ff;">'ext.YiiMongoDbSuite.*'</span><span style="color: #339933;">,</span>
+<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+&nbsp;
+<span style="color: #0000ff;">'components'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+    <span style="color: #666666; font-style: italic;">// ...</span>
+    <span style="color: #0000ff;">'mongodb'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+        <span style="color: #0000ff;">'class'</span>             <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'EMongoDB'</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'connectionString'</span>  <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'mongodb://localhost'</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'dbName'</span>            <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'myDatabaseName'</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'fsyncFlag'</span>         <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'safe'</span>              <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'useCursor'</span>         <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #666666; font-style: italic;">// ...</span>
+<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span></pre>
+
+<ul>
+<li>connectionString: 'localhost' should be changed to the ip or hostname of your host being connected to. For example if connecting to a server it might be <code>'connectionString' =&gt; 'mongodb://username@xxx.xx.xx.xx'</code> where xx.xx.xx.xx is the ip (or hostname) of your webserver or host.</li>
+<li>dbName: is the name you want the collections to be stored in. The database name.</li>
+<li>fsyncFlag is set to true, this makes mongodb make sure all writes to the database are safely stored to disk. Setting this to false will improve speed but writes are not confirmed. So unless you are doing massive or large imports or save() then it is better to be set to true. See the <a href="special.performance.html" title="6.1. Perfomance">performance section</a>.</li>
+<li>safeFlag // TODO</li>
+<li>useCursor flag // TODO</li>
+<li>For more info see the <a href="http://php.net/manual/en/mongo.connecting.php">MongoDB connection page on php.net</a>.</li>
+</ul>
+
+<p>That's all you have to do for setup. You can use it very much like the active record.
+Short example:</p>
+
+<pre class="php"><span style="color: #000088;">$client</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Client<span style="color: #339933;">;</span>
+<span style="color: #000088;">$client</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">first_name</span><span style="color: #339933;">=</span><span style="color: #0000ff;">'something'</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$client</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">save</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$clients</span> <span style="color: #339933;">=</span> Client<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+
+<h3>Resources</h3>
+
+<ul>
+<li><a href="https://github.com/canni/YiiMongoDbSuite/">Project page</a></li>
+<li><a href="http://www.mongodb.org/display/DOCS/Home">MongoDB documentation</a></li>
+<li><a href="http://www.php.net/manual/en/book.mongo.php">PHP MongoDB Driver docs</a></li>
+</ul>
+<dl class="location location-bottom"><dt>3. Setup<br/><a href="index.html">Table of Contents</a></dt><dd class="prev"><a href="changelog.html">&laquo; Previous</a><br/>2. Changelog</dd><dd class="next"><a href="basic.html">Next &raquo;</a><br/>4. Basic Usage</dd></dl>		</div>
+	
+	<div id="footer">
+		<p>Copyright &copy; <a href="http://www.cleverit.com.pl">2010 CleverIT</a></p>
+		<p>Available under the terms of license: <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation License 2.1</a></p>
+		<p>Generated by <strong>TypeFriendly 0.1.4</strong> by <a href="http://www.invenzzia.org/">Invenzzia</a></p>
+	</div>
+</div>
+
+</body>
+</html>

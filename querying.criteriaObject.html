@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="all" />
+
+	<title>The EMongoCriteria Object - YiiMongoDbSuite Manual</title>
+	
+	<link rel="stylesheet" type="text/css" href="design/generic.css" media="all"  />
+	<link rel="stylesheet" type="text/css" href="design/print.css" media="print" />
+	<!--[if lte IE 6]><link rel="stylesheet" href="design/ie.css" type="text/css" /><![endif]-->	
+	<!--[if IE 7]><link rel="stylesheet" href="design/ie7.css" type="text/css" /><![endif]-->
+</head>
+<body>
+
+<div id="wrap">
+	<div id="header">
+		<h1>YiiMongoDbSuite Manual 1.3</h1>
+		<h2>The EMongoCriteria Object</h2>
+		<p class="generated">@ 25.12.2010</p>
+		<p class="location"><a href="index.html"><strong>User manual</strong></a> &raquo; <a href="querying.html">Querying</a> &raquo; <a href="querying.criteriaObject.html">The EMongoCriteria Object</a></p>
+	</div>
+	
+	<div id="content"><dl class="location"><dt><a href="querying.html">5. Querying</a><br/>5.2. The EMongoCriteria Object</dt><dd class="prev">5.1. Simple queries<br/><a href="querying.simpleQueries.html">&laquo; Previous</a></dd><dd class="next">6. Special Topics<br/><a href="special.html">Next &raquo;</a></dd></dl>	<h1>5.2. The EMongoCriteria Object</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>By default MongoDB requires to build advanced query arrays if you want advanced search for documents in DB.</p>
+
+<p>The EMongoCriteria object simplifies process of building this query arrays.</p>
+
+<p>First of all create the object instance: <code>$criteria = new EMongoCriteria();</code></p>
+
+<p>You may define query criteria in three simple ways:</p>
+
+<ol>
+<li>Simple 'equlas' condition, that is equivalent of SQL: <code>WHERE fieldName = 'fieldValue'</code>:
+
+<ul>
+<li><code>$criteria-&gt;fieldName = 'fieldValue';</code></li>
+</ul></li>
+<li>By field name call ie. SQL: <code>WHERE fieldName &gt; 1234</code>:
+
+<ul>
+<li><code>$criteria-&gt;fieldName('&gt;', 1234);</code></li>
+</ul></li>
+<li>By addCond method ie. SQL: <code>WHERE fieldName &lt;= 1234</code>:
+
+<ul>
+<li><code>$criteria-&gt;addCond('fieldName', '&lt;=', 1234);</code></li>
+</ul></li>
+</ol>
+
+<p>You can add multiple conditions, using any of the above techniques, they will be mixed together.</p>
+
+<p>In addition to above the criteria object has additional special methods.</p>
+
+<ol>
+<li><code>limit($value)</code> that takes as parameter the query results limit, same as SQL <code>LIMIT</code> directive</li>
+<li><code>offset($value)</code> that takes as parameter the query results offset to get, same as SQL <code>LIMIT</code> directive second parameter</li>
+<li><code>sort($fieldName, $sortDirection)</code> this will be covered shortly</li>
+<li><code>select($array)</code> this will be covered shortly</li>
+</ol>
+
+<p><strong>NOTE: If you want to add simple criteria, that will use field name that is a method name from the above list,
+you can use the addCond method ie. <code>$criteria-&gt;addCond('limit', '==', 1234);</code></strong></p>
+
+<h3>sort EMongoCriteria method</h3>
+
+<p>The sort method takes two parameters</p>
+
+<ul>
+<li>first is a field name, to use for sorting</li>
+<li>second is a sort direction, witch may be one of:
+
+<ol>
+<li><code>EMongoCriteria::SORT_ASC</code> for ascending sorting (positive value 1)</li>
+<li><code>EMongoCriteria::SORT_DESC</code> for descending sorting (negative value -1)</li>
+</ol></li>
+</ul>
+
+<p>You can call sort method as many times as you wish, the sorting criteria will be mixed together.</p>
+
+<h3>select EMongoCriteria method</h3>
+
+<p>The select method takes only one argument, array of field names.</p>
+
+<p>By default MongoDB will return all fields from of document, use this method to tell mongo that
+you want only specified field list.</p>
+
+<p><strong>NOTE:</strong></p>
+
+<ul>
+<li>MongoDB regardless of anything, will always return the _id field within result sets</li>
+<li>You can call sort method multiple times, all calls will be merged using array_merge function</li>
+</ul>
+
+<h3>List of supported operators</h3>
+
+<p>List consist of operators and after <code>|</code> available shortcut (if any)</p>
+
+<p><em>NOTE: Operators are case-insensitive</em></p>
+
+<pre><code>- 'greater'   | &gt;
+- 'greaterEq' | &gt;=
+- 'less'      | &lt;
+- 'lessEq'    | &lt;=
+- 'notEq'     | !=, &lt;&gt;
+- 'in'        |
+- 'notIn'     |
+- 'all'       |
+- 'size'      |
+- 'exists'    |
+- 'notExists' |
+- 'type'      | // BSON type see mongodb docs for this
+- 'mod'       | %
+- 'equals'    | ==
+- 'elemMatch' |
+</code></pre>
+
+<p><em>NOTICE: the $or operator in newer versions of mongodb does NOT work with this extension yet. We will add it to the list above when it is fixed.</em></p>
+
+<p>Newer versions of mongodb will work, just not the $or operator.</p>
+
+<p>For examples and use for how to use these operators effectively, use the <a href="http://www.mongodb.org/display/DOCS/Advanced+Queries">MongoDB Operators Documentation here</a>.</p>
+
+<h3>Examples:</h3>
+
+<pre class="php"><span style="color: #666666; font-style: italic;">// first you must create a new criteria object</span>
+<span style="color: #000088;">$criteria</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> EMongoCriteria<span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// find the single user with the personal_number == 12345</span>
+<span style="color: #000088;">$criteria</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">personal_number</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'=='</span><span style="color: #339933;">,</span> 12345<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">// OR like this:</span>
+<span style="color: #000088;">$criteria</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">personal_number</span> <span style="color: #339933;">=</span> <span style="color: #cc66cc;">12345</span><span style="color: #339933;">;</span> 
+&nbsp;
+<span style="color: #000088;">$user</span> <span style="color: #339933;">=</span> User<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$criteria</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// find all users in New York. This will search in the embedded document of UserAddress</span>
+<span style="color: #000088;">$criteria</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">address</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">city</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'=='</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'New York'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">// Or</span>
+<span style="color: #000088;">$criteria</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">address</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">city</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'New York'</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$users</span> <span style="color: #339933;">=</span> User<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$criteria</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// Ok now try this. Only active users, only show at most 10 users, and sort by first name, descending, and offset by 20 (pagination):</span>
+<span style="color: #666666; font-style: italic;">// note the sort syntax. it must have an array value and use the =&gt; syntax.</span>
+<span style="color: #000088;">$criteria</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">status</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'=='</span><span style="color: #339933;">,</span> 1<span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">limit</span><span style="color: #009900;">&#40;</span>10<span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">sort</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'firstName'</span> <span style="color: #339933;">=&gt;</span> EMongoCriteria<span style="color: #339933;">::</span><span style="color: #004000;">SORT_DESC</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">offset</span><span style="color: #009900;">&#40;</span>20<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$users</span> <span style="color: #339933;">=</span> User<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$criteria</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// A more advanced case. All users with a personal_number evenly divisible by 10, sorted by first name ascending, limit 10 users, offset by 25 users (pagination), and remove any address fields from the returned result.</span>
+<span style="color: #000088;">$criteria</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">personal_number</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'%'</span><span style="color: #339933;">,</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">10</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #666666; font-style: italic;">// modulo =&gt; personal_number % 10 == 0</span>
+    <span style="color: #339933;">-&gt;</span><span style="color: #004000;">sort</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'firstName'</span> <span style="color: #339933;">=&gt;</span> EMongoCriteria<span style="color: #339933;">::</span><span style="color: #004000;">SORT_ASC</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #339933;">-&gt;</span><span style="color: #004000;">limit</span><span style="color: #009900;">&#40;</span>10<span style="color: #009900;">&#41;</span>
+    <span style="color: #339933;">-&gt;</span><span style="color: #004000;">offset</span><span style="color: #009900;">&#40;</span>25<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$users</span> <span style="color: #339933;">=</span> User<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$criteria</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+
+<h3>Regexp / SQL LIKE replacement</h3>
+
+<p>You can use native PHP Mongo driver class MongoRegex, to query:</p>
+
+<pre class="php"><span style="color: #666666; font-style: italic;">// Create criteria</span>
+<span style="color: #000088;">$criteria</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> EMongoCriteria<span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">// Find all records witch have first name starring on a, b and c, case insensitive search</span>
+<span style="color: #000088;">$criteria</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">first_name</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> MongoRegex<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/[abc].*/i'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$clients</span> <span style="color: #339933;">=</span> Client<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$criteria</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">// see phpdoc for MongoRegex class for more examples</span></pre>
+<dl class="location location-bottom"><dt>5.2. The EMongoCriteria Object<br/><a href="querying.html">5. Querying</a></dt><dd class="prev"><a href="querying.simpleQueries.html">&laquo; Previous</a><br/>5.1. Simple queries</dd><dd class="next"><a href="special.html">Next &raquo;</a><br/>6. Special Topics</dd></dl>		</div>
+	
+	<div id="footer">
+		<p>Copyright &copy; <a href="http://www.cleverit.com.pl">2010 CleverIT</a></p>
+		<p>Available under the terms of license: <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation License 2.1</a></p>
+		<p>Generated by <strong>TypeFriendly 0.1.4</strong> by <a href="http://www.invenzzia.org/">Invenzzia</a></p>
+	</div>
+</div>
+
+</body>
+</html>

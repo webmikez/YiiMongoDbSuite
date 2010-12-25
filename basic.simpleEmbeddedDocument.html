@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="all" />
+
+	<title>Simple Embeded Document Model - YiiMongoDbSuite Manual</title>
+	
+	<link rel="stylesheet" type="text/css" href="design/generic.css" media="all"  />
+	<link rel="stylesheet" type="text/css" href="design/print.css" media="print" />
+	<!--[if lte IE 6]><link rel="stylesheet" href="design/ie.css" type="text/css" /><![endif]-->	
+	<!--[if IE 7]><link rel="stylesheet" href="design/ie7.css" type="text/css" /><![endif]-->
+</head>
+<body>
+
+<div id="wrap">
+	<div id="header">
+		<h1>YiiMongoDbSuite Manual 1.3</h1>
+		<h2>Simple Embeded Document Model</h2>
+		<p class="generated">@ 25.12.2010</p>
+		<p class="location"><a href="index.html"><strong>User manual</strong></a> &raquo; <a href="basic.html">Basic Usage</a> &raquo; <a href="basic.simpleEmbeddedDocument.html">Simple Embeded Document Model</a></p>
+	</div>
+	
+	<div id="content"><dl class="location"><dt><a href="basic.html">4. Basic Usage</a><br/>4.2. Simple Embeded Document Model</dt><dd class="prev">4.1. Simple Model (Document in collection)<br/><a href="basic.simpleModel.html">&laquo; Previous</a></dd><dd class="next">4.3. Embedded Documents<br/><a href="basic.embeddedDocuments.html">Next &raquo;</a></dd></dl>	<h1>4.2. Simple Embeded Document Model</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>To fully understand this example please refer to [Embedded Documents Models Section][basic.embeddedDocuments]</p>
+
+<p>To use embedded documents you need to do two steps:</p>
+
+<ol>
+<li>First create model for embedded document
+(we will add address as embedded document to User model from previous [example][basic.simpleModel] ):</li>
+</ol>
+
+<pre class="php"><span style="color: #009933; font-style: italic;">/**
+ * Note that we extending EMongoEmbeddedDocument, not regular EMongoDocument class
+ * this is for performance reasons, embedded documents do not need to have, all
+ * connection, and collection management stuff, this is explained in [Embedded Documents Models Section][basic.embeddedDocuments]
+ *
+ * NOTE: You may define regular EMongoDocument as an embedded in another one, if you really want to, it will still work
+ */</span>
+<span style="color: #000000; font-weight: bold;">class</span> UserAddress <span style="color: #000000; font-weight: bold;">extends</span> EMongoEmbeddedDocument
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$apartment</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$house</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$street</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$city</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$zip</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// We may define rules for embedded document too</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> rules<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+            <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'apartment, house, street, city, zip'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'required'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+            <span style="color: #666666; font-style: italic;">// ...</span>
+        <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// And attribute names too</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> attributeNames<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> <span style="color: #666666; font-style: italic;">/* ... */</span> <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// NOTE: for embedded documents we do not define static model method!</span>
+    <span style="color: #666666; font-style: italic;">//       we do not define getCollectionName method either.</span>
+<span style="color: #009900;">&#125;</span></pre>
+
+<ol>
+<li>Next we have to define <code>embeddedDocuments()</code> method in model that will contain embedded document</li>
+</ol>
+
+<p>Add <code>embeddedDocument()</code> method to previous <code>User</code> model example:</p>
+
+<pre class="php"><span style="color: #000000; font-weight: bold;">class</span> User <span style="color: #000000; font-weight: bold;">extends</span> EMongoDocument
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #666666; font-style: italic;">// ...</span>
+&nbsp;
+    <span style="color: #009933; font-style: italic;">/**
+     * This method should return simple array that will define field names for embedded
+     * documents, and class to use for them
+     */</span> 
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> embeddedDocuments<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+            <span style="color: #666666; font-style: italic;">// property field name =&gt; class name to use for this embedded document</span>
+            <span style="color: #0000ff;">'address'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'UserAddress'</span><span style="color: #339933;">,</span>
+        <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// ...</span>
+<span style="color: #009900;">&#125;</span></pre>
+
+<p>Now, the fun part starts!</p>
+
+<p>We can now do things like:</p>
+
+<pre class="php"><span style="color: #000088;">$user</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> User<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">address</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">city</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'New York'</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">address</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">street</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'Some street name'</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// This will save user to users collection, with UserAddress embedded document set,</span>
+<span style="color: #666666; font-style: italic;">// and this handle with validation of embedded documents too!</span>
+<span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">save</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// After that:</span>
+<span style="color: #000088;">$user</span> <span style="color: #339933;">=</span> User<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// Models will be automatically populated with embedded documents that they contain,</span>
+<span style="color: #666666; font-style: italic;">// so we can do:</span>
+<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">address</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">city</span><span style="color: #339933;">;</span></pre>
+<dl class="location location-bottom"><dt>4.2. Simple Embeded Document Model<br/><a href="basic.html">4. Basic Usage</a></dt><dd class="prev"><a href="basic.simpleModel.html">&laquo; Previous</a><br/>4.1. Simple Model (Document in collection)</dd><dd class="next"><a href="basic.embeddedDocuments.html">Next &raquo;</a><br/>4.3. Embedded Documents</dd></dl>		</div>
+	
+	<div id="footer">
+		<p>Copyright &copy; <a href="http://www.cleverit.com.pl">2010 CleverIT</a></p>
+		<p>Available under the terms of license: <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation License 2.1</a></p>
+		<p>Generated by <strong>TypeFriendly 0.1.4</strong> by <a href="http://www.invenzzia.org/">Invenzzia</a></p>
+	</div>
+</div>
+
+</body>
+</html>
