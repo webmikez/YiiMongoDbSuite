@@ -71,8 +71,10 @@
 <li><code>select($array)</code> this will be covered shortly</li>
 </ol>
 
-<p><strong>NOTE: If you want to add simple criteria, that will use field name that is a method name from the above list,
-you can use the addCond method ie. <code>$criteria-&gt;addCond('limit', '==', 1234);</code></strong></p>
+<blockquote class="information">
+  <p>If you want to add simple criteria, that will use field name that is a method name from the above list,
+  you can use the addCond method ie. <code>$criteria-&gt;addCond('limit', '==', 1234);</code></p>
+</blockquote>
 
 <h3 id="h:querying_criteria-object:sort">sort EMongoCriteria method</h3>
 
@@ -97,18 +99,20 @@ you can use the addCond method ie. <code>$criteria-&gt;addCond('limit', '==', 12
 <p>By default MongoDB will return all fields from of document, use this method to tell mongo that
 you want only specified field list.</p>
 
-<p><strong>NOTE:</strong></p>
-
-<ul>
-<li>MongoDB regardless of anything, will always return the _id field within result sets</li>
-<li>You can call sort method multiple times, all calls will be merged using array_merge function</li>
-</ul>
+<blockquote class="important">
+  <ul>
+  <li>MongoDB regardless of anything, will always return the _id field within result sets</li>
+  <li>You can call sort method multiple times, all calls will be merged using array_merge function</li>
+  </ul>
+</blockquote>
 
 <h3 id="h:querying_criteria-object:oplist">List of supported operators</h3>
 
 <p>List consist of operators and after <code>|</code> available shortcut (if any)</p>
 
-<p><em>NOTE: Operators are case-insensitive</em></p>
+<blockquote class="information">
+  <p>Operators are case-insensitive</p>
+</blockquote>
 
 <pre><code>- 'greater'   | &gt;
 - 'greaterEq' | &gt;=
@@ -127,7 +131,9 @@ you want only specified field list.</p>
 - 'elemMatch' |
 </code></pre>
 
-<p><em>NOTICE: the $or operator in newer versions of mongodb does NOT work with this extension yet. We will add it to the list above when it is fixed.</em></p>
+<blockquote class="warning">
+  <p>the $or operator in newer versions of mongodb does NOT work with this extension yet. We will add it to the list above when it is fixed.</p>
+</blockquote>
 
 <p>Newer versions of mongodb will work, just not the $or operator.</p>
 

@@ -85,7 +85,11 @@
 <span style="color: #666666; font-style: italic;">// this will find only clients that have status set to parameter value:</span>
 <span style="color: #000088;">$all</span> <span style="color: #339933;">=</span> Client<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">byStatus</span><span style="color: #009900;">&#40;</span>1<span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
 
-<p><em>NOTE: You can chain multiple named scopes ie. <code>Client::model()-&gt;active()-&gt;byStatus(1)-&gt;findAll();</code></em></p>
+<blockquote class="information">
+  <h4>You can chain multiple named scopes</h4>
+  
+  <p>example: <code>Client::model()-&gt;active()-&gt;byStatus(1)-&gt;findAll();</code></p>
+</blockquote>
 <dl class="location location-bottom"><dt>6.3. Named Scopes<br/><a href="advanced.html">6. The Advanced Stuff</a></dt><dd class="prev"><a href="advanced.primary-key.html">&laquo; Previous</a><br/>6.2. Primary Keys</dd><dd class="next"><a href="advanced.relations.html">Next &raquo;</a><br/>6.4. Relations</dd></dl>		</div>
 	
 	<div id="footer">

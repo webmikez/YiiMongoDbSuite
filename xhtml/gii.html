@@ -45,9 +45,11 @@
 
 <p>Now you can generate CRUD for yours MongoDB Documents! just you have to add generator path to yours Gii config</p>
 
-<p><em>Important:</em> By default generated models will use mongo _id field as a primary key (using MongoId class)
-this generator will use different field as a primary key, if you will override primaryKey() method to return
-something different than '_id'. Note that generator cannot handle with multifield primary key,</p>
+<blockquote class="important">
+  <p>By default generated models will use mongo <code>_id</code> field as a primary key (using MongoId class)
+  this generator will use different field as a primary key, if you will override <code>primaryKey()</code> method to return
+  something different than '_id'. Note that generator cannot handle with multifield primary key,</p>
+</blockquote>
 
 <pre class="php"><span style="color: #666666; font-style: italic;">// in yours main.php config file:</span>
 <span style="color: #0000ff;">'modules'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span>

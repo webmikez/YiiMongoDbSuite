@@ -36,7 +36,9 @@
 	
 	<div id="content"><dl class="location"><dt><a href="advanced.html">6. The Advanced Stuff</a><br/>6.2. Primary Keys</dt><dd class="prev">6.1. Indexing<br/><a href="advanced.indexing.html">&laquo; Previous</a></dd><dd class="next">6.3. Named Scopes<br/><a href="advanced.named-scopes.html">Next &raquo;</a></dd></dl>	<h1>6.2. Primary Keys</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>By default YiiMongoDbSuite will always use the <code>_id</code> field as a collection primary key.</p>
 
-<p>MongoDB itself guarantee that this field will be unique across collection.</p>
+<blockquote class="information">
+  <p>MongoDB itself guarantee that <code>_id</code> field will be unique across collection.</p>
+</blockquote>
 
 <h2 id="h:advanced_primary-key:_id">The <code>_id</code> field</h2>
 
@@ -54,8 +56,11 @@
 
 <p><code>$model-&gt;findByPk(new MongoID('4ced75e1eb4ae8ca44000000'));</code></p>
 
-<p><em>NOTE: You can put any value into an <code>_id</code> field, as long as it will be unique across whole collection,
-mongo will create the MongoID object, only if you insert new model to the DB, with _id field set to <code>NULL</code></em></p>
+<blockquote class="information">
+  <h4>You can put <strong>any</strong> value into an <code>_id</code> field</h4>
+  
+  <p>MongoDB will auto populate _id field by MongoID objects <strong>only when</strong> it is set to <code>NULL</code></p>
+</blockquote>
 
 <h2 id="h:advanced_primary-key:ownpk">Own defined Primary Key for collection</h2>
 

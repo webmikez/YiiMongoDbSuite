@@ -49,23 +49,21 @@
         <span style="color: #0000ff;">'class'</span>             <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'EMongoDB'</span><span style="color: #339933;">,</span>
         <span style="color: #0000ff;">'connectionString'</span>  <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'mongodb://localhost'</span><span style="color: #339933;">,</span>
         <span style="color: #0000ff;">'dbName'</span>            <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'myDatabaseName'</span><span style="color: #339933;">,</span>
-        <span style="color: #0000ff;">'fsyncFlag'</span>         <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span>
-        <span style="color: #0000ff;">'safe'</span>              <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'fsyncFlag'</span>         <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'safe'</span>              <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
         <span style="color: #0000ff;">'useCursor'</span>         <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
     <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
     <span style="color: #666666; font-style: italic;">// ...</span>
 <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span></pre>
 
 <ul>
-<li>connectionString: 'localhost' should be changed to the ip or hostname of your host being connected to. For example if connecting
+<li><code>connectionString</code>: 'localhost' should be changed to the ip or hostname of your host being connected to. For example if connecting
 to a server it might be <code>'connectionString' =&gt; 'mongodb://username@xxx.xx.xx.xx'</code> where xx.xx.xx.xx is the ip (or hostname)
 of your webserver or host.</li>
-<li>dbName: is the name you want the collections to be stored in. The database name.</li>
-<li>fsyncFlag is set to true, this makes mongodb make sure all writes to the database are safely stored to disk.
-Setting this to false will improve speed but writes are not confirmed. So unless you are doing massive or large
-imports or save() then it is better to be set to true. See the <a href="special.html#h:special:performance" title="8. Special Topics">performance section</a>.</li>
-<li>safeFlag // TODO</li>
-<li>useCursor flag // TODO</li>
+<li><code>dbName</code>: is the name you want the collections to be stored in. The database name.</li>
+<li><code>fsyncFlag</code> and <code>safeFlag</code> - see the <a href="advanced.write-flags.html" title="6.6. Write Queries Flags">Write Queries Flags Section</a>,
+<strong>state of this flags has massive impact on behavior of this extension, PLEASE read the linked chapter!</strong></li>
+<li><code>useCursor</code> flag see <a href="special.html#h:special:usecursorflag" title="8. Special Topics">Use cursor special topic</a></li>
 <li>For more info see the <a href="http://php.net/manual/en/mongo.connecting.php">MongoDB connection page on php.net</a>.</li>
 </ul>
 
