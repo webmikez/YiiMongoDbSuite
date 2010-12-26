@@ -1,0 +1,1255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="all" />
+
+	<title>YiiMongoDbSuite Manual</title>
+	
+	<link rel="stylesheet" type="text/css" href="design/generic.css" media="all"  />
+	<link rel="stylesheet" type="text/css" href="design/print.css" media="print" />
+	<!--[if lte IE 6]><link rel="stylesheet" href="design/ie.css" type="text/css" /><![endif]-->
+	<!--[if IE 7]><link rel="stylesheet" href="design/ie7.css" type="text/css" /><![endif]-->	
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17148216-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head>
+<body>
+
+<div id="wrap">
+	<div id="header">
+		<h1>YiiMongoDbSuite Manual 1.3.3</h1>
+		<p class="generated">@ 26.12.2010</p>
+		<p class="location"><a href="index.html"><strong>User manual</strong></a></p>
+	</div>
+	
+	<div id="content"><h1>YiiMongoDbSuite Manual 1.3.3</h1><div class="tf_reference"><table><tr><td><strong>Copyright &copy; 2010 CleverIT</strong></td></tr><tr><td>Available under the terms of license: GNU Free Documentation License 2.1</td></tr><tr><td>Generated: 26.12.2010</td></tr></table><hr/></div><h4 id="toc">Table of Contents</h4><ul class="toc"><li><a href="#toc:introduction">1. Introduction</a></li><li><a href="#toc:changelog">2. Changelog</a></li><li><a href="#toc:setup">3. Setup</a></li><li><a href="#toc:basic">4. Basic Usage</a><ul class="toc"><li><a href="#toc:basic_simple-model">4.1. Simple Model (Document in collection)</a></li><li><a href="#toc:basic_simple-embedded-document">4.2. Simple Embeded Document Model</a></li><li><a href="#toc:basic_embedded-documents">4.3. Embedded Documents</a></li><li><a href="#toc:basic_arrays">4.4. Arrays</a><ul class="toc"><li><a href="#toc:basic_arrays_simple">4.4.1. Simple Arrays</a></li><li><a href="#toc:basic_arrays_embedded-documents">4.4.2. Array of Embedded Documents</a></li></ul></li></ul></li><li><a href="#toc:querying">5. Querying</a><ul class="toc"><li><a href="#toc:querying_simple-queries">5.1. Simple queries</a></li><li><a href="#toc:querying_criteria-object">5.2. The EMongoCriteria Object</a></li></ul></li><li><a href="#toc:advanced">6. The Advanced Stuff</a><ul class="toc"><li><a href="#toc:advanced_indexing">6.1. Indexing</a></li><li><a href="#toc:advanced_primary-key">6.2. Primary Keys</a></li><li><a href="#toc:advanced_named-scopes">6.3. Named Scopes</a></li><li><a href="#toc:advanced_relations">6.4. Relations</a></li><li><a href="#toc:advanced_data-provider">6.5. Data Provider Object</a></li><li><a href="#toc:advanced_write-flags">6.6. Write Queries Flags</a></li><li><a href="#toc:advanced_gridfs">6.7. GridFS</a></li></ul></li><li><a href="#toc:gii">7. Gii Support</a></li><li><a href="#toc:special">8. Special Topics</a><ul class="toc"><li><a href="#toc:special_multimodel">8.1. Multimodel Collections</a></li></ul></li></ul><dl id="toc:introduction" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>1. Introduction</dt><dd class="next">2. Changelog<br/><a href="#toc:changelog">Next &raquo;</a></dd></dl>	<h1>1. Introduction</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This extension is an almost complete, ActiveRecord like support for MongoDB in Yii</p>
+
+<p>It originally started as a fork of <a href="http://www.yiiframework.com/extension/mongorecord" title="MongoRecord">MongoRecord</a>
+extension written by <a href="http://www.yiiframework.com/user/31/" title="tyohan">tyohan</a>,
+to fix some major bugs, and add full featured suite for <a href="http://www.mongodb.org" title="MongoDB">MongoDB</a> developers.</p>
+
+<h3>Limitations:</h3>
+
+<ul>
+<li>The main limitations are only those present in MongoDB itself, like the 4MB single document data limit. But That's not a big deal either.</li>
+<li>In it's current incarnation, This extension does NOT work with the OR operator. When we get it working we will remove this line and add an example.</li>
+</ul>
+
+<h3>Requirements:</h3>
+
+<ul>
+<li>Yii 1.1.5 is required</li>
+<li>MongoDB latest stable is recommended. Untested with older versions.</li>
+</ul>
+
+<h3>Known bugs</h3>
+
+<ul>
+<li>Remember, this is not complete yet. So at this stage, it can have some ;]</li>
+<li>If you find any please let me know</li>
+<li>As said before, it does not work with the OR operators</li>
+</ul>
+
+<h3>Resources</h3>
+
+<ul>
+<li><a href="https://github.com/canni/YiiMongoDbSuite">Project page on GitHub</a></li>
+<li><a href="http://www.mongodb.org/display/DOCS/Home">MongoDB documentation</a></li>
+<li><a href="http://canni.github.com/YiiMongoDbSuite">On-Line version of this documentation</a></li>
+<li><a href="http://www.php.net/manual/en/book.mongo.php">PHP MongoDB Driver docs</a></li>
+<li><a href="http://www.yiiframework.com/doc/guide/1.1/en/database.ar">Standard Yii ActiveRecord Documentation</a></li>
+</ul>
+
+<h3>Contribution needed!</h3>
+
+<ul>
+<li>I'm not English native speaker, need someone who can correct/rewrite/write my documentation and/or PHPDoc's in code</li>
+<li>Any help would be great :)</li>
+<li>Contact me: darek.krk on a gmail dot com or via GitHub PM</li>
+</ul>
+
+<h3>Big thanks goes to:</h3>
+
+<ul>
+<li>tyohan: for first inspirations and idea of extension</li>
+<li>luckysmack: for big help with testing and documentation</li>
+<li>Jose Martinez and Philippe Gaultier, for implementing and sharing GridFS support</li>
+<li>Nagy Attila Gábor, for big help with new functionality and testing</li>
+</ul>
+<dl id="toc:changelog" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>2. Changelog</dt><dd class="prev">1. Introduction<br/><a href="#toc:introduction">&laquo; Previous</a></dd><dd class="next">3. Setup<br/><a href="#toc:setup">Next &raquo;</a></dd></dl>	<h1>2. Changelog</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This is the 1.3.3 release</p>
+
+<p>New features in 1.3.3</p>
+
+<ul>
+<li>Ability to set FSync and Safe flag on different scopes, see the <a href="#toc:advanced_write-flags" title="6.6. Write Queries Flags">Write queries flags</a> documentation part</li>
+<li><strong>Ability to use efficient Cursors instead of raw array, returned by the findAll* methods</strong> see <a href="#h:special:useCursorFlag" title="8. Special Topics">Use Cursor Flag</a> documentation part</li>
+</ul>
+
+<p>New features in 1.3.2</p>
+
+<ul>
+<li>Fixed bug that find* methods don't accept criteria in array format</li>
+<li>Lazy loading/creating of embedded documents</li>
+<li>Little performance boost, save embedded documents configs in static array</li>
+</ul>
+
+<p>New features in 1.3.1</p>
+
+<ul>
+<li>Fixed few major bugs in EMongoCriteria class</li>
+<li><em>Bugfixes to criteria object had forced to change the criteria object creation from array, please see the <a href="#h:querying_criteria-object:array" title="5.2. The EMongoCriteria Object">updated doc</a> for it</em></li>
+<li>Fixed bug that in massive assign way, embedded documents always used only safe attributes</li>
+<li>Setup of PHPUnit testing framework</li>
+<li>Written test cases for EMongoDB class and EMongoCriteria class </li>
+</ul>
+
+<p>New features in 1.3</p>
+
+<ul>
+<li>MongoDB <a href="#toc:advanced_gridfs" title="6.7. GridFS">GridFS feature support</a>, thanks to work of: Jose Martinez and Philippe Gaultier</li>
+</ul>
+
+<p>New features in 1.2.3</p>
+
+<ul>
+<li>Gii CRUD generator, now generates advanced search form in admin (like in regular Yii CRUD generator)</li>
+<li>Search form now supports comparsion operators ( > | &lt; | >= | &lt;= | &lt;> | != | == | = )</li>
+<li>In v1.2.2 all search attributes where treated as a string regex, now you can test numbers to, just juse comparsion operators, example:
+
+<ul>
+<li>search for '1234' will try to find a string matching regexp /1234/i (this will not work if field is numeric)</li>
+<li>search for '= 1234' will try to find numberic value 1234</li>
+<li>search for '>= 1234' will try to find any record with field greater or equals numeric value 1234 </li>
+</ul></li>
+</ul>
+
+<p>New features in 1.2.2</p>
+
+<ul>
+<li>Magic method search() delivered with every EMongoDocument object</li>
+<li>Gii CRUD generator now uses search method, to provide text search in admin view (by default using case-insensitive regexp)</li>
+<li>EMongoDocument search() method has one parameter:
+
+<ul>
+<li>$caseSensitive true|false, default to false, whathever to use case-sensitive string comparsion </li>
+</ul></li>
+</ul>
+
+<p>New features in 1.2.1</p>
+
+<ul>
+<li><strong>Support for <a href="#h:gii:crud" title="7. Gii Support">generating CRUD</a> for EMongoDocument models!</strong></li>
+<li>Few minor bug fixes</li>
+</ul>
+
+<p>New features in 1.2</p>
+
+<ul>
+<li>Support for using any other than <a href="#h:advanced_primary-key:ownpk" title="6.2. Primary Keys">_id field as a Primary Key</a></li>
+<li>Better names scopes handling, support for default scope</li>
+<li><em>Support to have different models in single collection! see <a href="#toc:special_multimodel" title="8.1. Multimodel Collections">Multimodel collection topic</a></em></li>
+<li>Better memory management, now there is only one collection object instance, per model</li>
+</ul>
+
+<p>New features in 1.1</p>
+
+<ul>
+<li><a href="#toc:advanced_indexing" title="6.1. Indexing">automated efficient index</a> definition for collections, per model</li>
+</ul>
+
+<p>New features in 1.0:</p>
+
+<ul>
+<li><a href="#toc:advanced_named-scopes" title="6.3. Named Scopes">Named scopes</a> just like in AR</li>
+<li>Very easy to use <a href="#toc:querying_criteria-object" title="5.2. The EMongoCriteria Object">criteria object</a>, you don't have to create complex MongoDB query arrays!</li>
+<li>Better exeption handling</li>
+<li>A lot more PHPDocs in code </li>
+</ul>
+
+<p>Features:</p>
+
+<ul>
+<li>Support of using Class::model()->find / findAll / count / countByAttributes and other Yii ActiveRecord syntax</li>
+<li>Support of schema-less documents with Yii standard rules and validation features</li>
+<li>Endless Embedded/Nested document support (Embedded documents are their own Model class with their own rules and other methods.</li>
+<li>(almost, limited only by MongoDB 4MB limit of single document) endless document embedding/nesting</li>
+<li>Ready to go out-of-box <em>EFFICIENT</em> DataProvider, witch use native php db driver sort, limit and offset features for returning results!</li>
+<li>Records and embedded documents inherit from CModel, so you can use every class witch can handle of CModel (ie: Gii form generator)</li>
+<li><a href="#toc:advanced_relations" title="6.4. Relations">relation support <em>idea/concept/example</em></a></li>
+</ul>
+<dl id="toc:setup" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>3. Setup</dt><dd class="prev">2. Changelog<br/><a href="#toc:changelog">&laquo; Previous</a></dd><dd class="next">4. Basic Usage<br/><a href="#toc:basic">Next &raquo;</a></dd></dl>	<h1>3. Setup</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>In your main configuration file, witch is by default: <code>protected/config/main.php</code> config file.</p>
+
+<p>Add the following to the file:</p>
+
+<pre class="php"><span style="color: #0000ff;">'import'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+    <span style="color: #666666; font-style: italic;">// ...</span>
+    <span style="color: #0000ff;">'ext.YiiMongoDbSuite.*'</span><span style="color: #339933;">,</span>
+<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+&nbsp;
+<span style="color: #0000ff;">'components'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+    <span style="color: #666666; font-style: italic;">// ...</span>
+    <span style="color: #0000ff;">'mongodb'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+        <span style="color: #0000ff;">'class'</span>             <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'EMongoDB'</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'connectionString'</span>  <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'mongodb://localhost'</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'dbName'</span>            <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'myDatabaseName'</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'fsyncFlag'</span>         <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'safe'</span>              <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'useCursor'</span>         <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #666666; font-style: italic;">// ...</span>
+<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span></pre>
+
+<ul>
+<li>connectionString: 'localhost' should be changed to the ip or hostname of your host being connected to. For example if connecting
+to a server it might be <code>'connectionString' =&gt; 'mongodb://username@xxx.xx.xx.xx'</code> where xx.xx.xx.xx is the ip (or hostname)
+of your webserver or host.</li>
+<li>dbName: is the name you want the collections to be stored in. The database name.</li>
+<li>fsyncFlag is set to true, this makes mongodb make sure all writes to the database are safely stored to disk.
+Setting this to false will improve speed but writes are not confirmed. So unless you are doing massive or large
+imports or save() then it is better to be set to true. See the <a href="#h:special:performance" title="8. Special Topics">performance section</a>.</li>
+<li>safeFlag // TODO</li>
+<li>useCursor flag // TODO</li>
+<li>For more info see the <a href="http://php.net/manual/en/mongo.connecting.php">MongoDB connection page on php.net</a>.</li>
+</ul>
+
+<p>That's all you have to do for setup. You can use it very much like the active record.
+Short example:</p>
+
+<pre class="php"><span style="color: #000088;">$client</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Client<span style="color: #339933;">;</span>
+<span style="color: #000088;">$client</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">first_name</span><span style="color: #339933;">=</span><span style="color: #0000ff;">'something'</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$client</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">save</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$clients</span> <span style="color: #339933;">=</span> Client<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+<dl id="toc:basic" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>4. Basic Usage</dt><dd class="prev">3. Setup<br/><a href="#toc:setup">&laquo; Previous</a></dd><dd class="next">4.1. Simple Model (Document in collection)<br/><a href="#toc:basic_simple-model">Next &raquo;</a></dd></dl>	<h1>4. Basic Usage</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This section shows some basic, quick-start usage examples, follow to the next chapters.</p>
+
+<p><em>NOTE: <code>EMongoDocument</code> and <code>EMongoEmbeddedDocument</code> extends standard <code>CModel</code> class, you can do with them all
+things that can be done with standard <code>CModel</code> objects!</em></p>
+<dl id="toc:basic_simple-model" class="location location-middle"><dt><a href="#toc:basic">4. Basic Usage</a><br/>4.1. Simple Model (Document in collection)</dt><dd class="prev">4. Basic Usage<br/><a href="#toc:basic">&laquo; Previous</a></dd><dd class="next">4.2. Simple Embeded Document Model<br/><a href="#toc:basic_simple-embedded-document">Next &raquo;</a></dd></dl>	<h1>4.1. Simple Model (Document in collection)</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>For basic use, just declare simple model, under yours application models directory,
+we will show simple User model that will represent documents stored in <code>users</code> MongoDB collection.</p>
+
+<pre class="php"><span style="color: #000000; font-weight: bold;">class</span> User <span style="color: #000000; font-weight: bold;">extends</span> EMongoDocument <span style="color: #666666; font-style: italic;">// Notice: We extend EMongoDocument class instead of CActiveRecord</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$personal_no</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$login</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$first_name</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$last_name</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$email</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #009933; font-style: italic;">/**
+     * This method have to be defined in every Model
+     * @return string MongoDB collection name, witch will be used to store documents of this model
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> getCollectionName<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">'users'</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// We can define rules for fields, just like in normal CModel/CActiveRecord classes</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> rules<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+            <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'login, email, personal_no'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'required'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+            <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'personal_no'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'numeric'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'integerOnly'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+            <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'email'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'email'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// the same with attribute names</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> attributeNames<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+            <span style="color: #0000ff;">'email'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'E-Mail Address'</span><span style="color: #339933;">,</span>
+        <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #009933; font-style: italic;">/**
+     * This method have to be defined in every model, like with normal CActiveRecord
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> static <span style="color: #000000; font-weight: bold;">function</span> model<span style="color: #009900;">&#40;</span><span style="color: #000088;">$className</span><span style="color: #339933;">=</span><span style="color: #009900; font-weight: bold;">__CLASS__</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> parent<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$classname</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre>
+
+<p>Now we can star using our model, just as normal Yii ActiveRecord!</p>
+
+<pre class="php"><span style="color: #000088;">$user</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> User<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">personal_no</span> <span style="color: #339933;">=</span> <span style="color: #cc66cc;">1234</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">login</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'somelogin'</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">email</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'email@example.com'</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">save</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// This will store document with user data into MongoDB collection</span></pre>
+<dl id="toc:basic_simple-embedded-document" class="location location-middle"><dt><a href="#toc:basic">4. Basic Usage</a><br/>4.2. Simple Embeded Document Model</dt><dd class="prev">4.1. Simple Model (Document in collection)<br/><a href="#toc:basic_simple-model">&laquo; Previous</a></dd><dd class="next">4.3. Embedded Documents<br/><a href="#toc:basic_embedded-documents">Next &raquo;</a></dd></dl>	<h1>4.2. Simple Embeded Document Model</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>To fully understand this example please refer to <a href="#toc:basic_embedded-documents" title="4.3. Embedded Documents">Embedded Documents Models Section</a></p>
+
+<p>To use embedded documents you need to do two steps:</p>
+
+<ul>
+<li>First create model for embedded document
+(we will add address as embedded document to User model from previous <a href="#toc:basic_simple-model" title="4.1. Simple Model">example</a> ):</li>
+</ul>
+
+<pre class="php"><span style="color: #009933; font-style: italic;">/**
+ * Note that we extending EMongoEmbeddedDocument, not regular EMongoDocument class
+ * this is for performance reasons, embedded documents do not need to have, all
+ * connection, and collection management stuff, this is explained in [Embedded Documents Models Section][basic.embeddedDocuments]
+ *
+ * NOTE: You may define regular EMongoDocument as an embedded in another one, if you really want to, it will still work
+ */</span>
+<span style="color: #000000; font-weight: bold;">class</span> UserAddress <span style="color: #000000; font-weight: bold;">extends</span> EMongoEmbeddedDocument
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$apartment</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$house</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$street</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$city</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$zip</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// We may define rules for embedded document too</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> rules<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+            <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'apartment, house, street, city, zip'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'required'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+            <span style="color: #666666; font-style: italic;">// ...</span>
+        <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// And attribute names too</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> attributeNames<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> <span style="color: #666666; font-style: italic;">/* ... */</span> <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// NOTE: for embedded documents we do not define static model method!</span>
+    <span style="color: #666666; font-style: italic;">//       we do not define getCollectionName method either.</span>
+<span style="color: #009900;">&#125;</span></pre>
+
+<ul>
+<li>Next we have to define <code>embeddedDocuments()</code> method in model that will contain embedded document</li>
+</ul>
+
+<p>Add <code>embeddedDocument()</code> method to previous <code>User</code> model example:</p>
+
+<pre class="php"><span style="color: #000000; font-weight: bold;">class</span> User <span style="color: #000000; font-weight: bold;">extends</span> EMongoDocument
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #666666; font-style: italic;">// ...</span>
+&nbsp;
+    <span style="color: #009933; font-style: italic;">/**
+     * This method should return simple array that will define field names for embedded
+     * documents, and class to use for them
+     */</span> 
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> embeddedDocuments<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+            <span style="color: #666666; font-style: italic;">// property field name =&gt; class name to use for this embedded document</span>
+            <span style="color: #0000ff;">'address'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'UserAddress'</span><span style="color: #339933;">,</span>
+        <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// ...</span>
+<span style="color: #009900;">&#125;</span></pre>
+
+<p>Now, the fun part starts!</p>
+
+<p>We can now do things like:</p>
+
+<pre class="php"><span style="color: #000088;">$user</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> User<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">address</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">city</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'New York'</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">address</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">street</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'Some street name'</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// This will save user to users collection, with UserAddress embedded document set,</span>
+<span style="color: #666666; font-style: italic;">// and this handle with validation of embedded documents too!</span>
+<span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">save</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// After that:</span>
+<span style="color: #000088;">$user</span> <span style="color: #339933;">=</span> User<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// Models will be automatically populated with embedded documents that they contain,</span>
+<span style="color: #666666; font-style: italic;">// so we can do:</span>
+<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">address</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">city</span><span style="color: #339933;">;</span></pre>
+<dl id="toc:basic_embedded-documents" class="location location-middle"><dt><a href="#toc:basic">4. Basic Usage</a><br/>4.3. Embedded Documents</dt><dd class="prev">4.2. Simple Embeded Document Model<br/><a href="#toc:basic_simple-embedded-document">&laquo; Previous</a></dd><dd class="next">4.4. Arrays<br/><a href="#toc:basic_arrays">Next &raquo;</a></dd></dl>	<h1>4.3. Embedded Documents</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><h2>Basic informations about embedded documents</h2>
+
+<h3 id="h:basic_embedded-documents:mustknow">Must know:</h3>
+
+<ul>
+<li>For performance reasons all models of embedded documents should extend from <code>EMongoEmbeddedDocument</code> class</li>
+<li>But the above is not a must, things will still work if you define as embedded child classes of regular <code>EMongoDocument</code></li>
+<li>You can define as many embedded documents as you wish</li>
+<li>Every embedded document <strong>can contain</strong> embedded documents!</li>
+<li>The only limit for this mechanism is that serialized version (in raw array format) of whole document, must not extend the 4 MB size</li>
+<li>For documents bigger than 4 MB see the <a href="#toc:advanced_gridfs" title="6.7. GridFS">GridFS Section</a></li>
+<li>Main difference between <code>EMongoDocument</code> and EMongoEmbeddedDocument` is that:
+
+<ul>
+<li>EMongoDocument extends from EMongoEmbeddedDocument</li>
+<li>EMongoDocument is equipped with all methods needed to save its contents into a MongoDB collection</li>
+<li>You cannot call ie <code>save()</code> method on a EMongoEmbeddedDocument</li>
+</ul></li>
+</ul>
+
+<h3 id="h:basic_embedded-documents:defining">Defining embedded documents within document</h3>
+
+<p><strong>This applies to EMongoDocument and EMongoEmbeddedDocument</strong></p>
+
+<p>Just define the <code>embeddedDocuments()</code> method in yours model class, it should return array of
+simple key => value pairs.</p>
+
+<ul>
+<li>Array values are class names that will be used to instantinate embedded documents</li>
+<li>Array keys are treated as property names of given embedded document class </li>
+</ul>
+
+<p>example:</p>
+
+<pre class="php"><span style="color: #666666; font-style: italic;">// ...</span>
+<span style="color: #666666; font-style: italic;">// within model class</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> embeddedDocuments<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+        <span style="color: #0000ff;">'address'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'UserAddress'</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'some_other_field_name'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'AnyEMongoEmbeddedDocumentChildClass'</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// this will give you access to propeties of model:</span>
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">address</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">embeddedExampleField</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">some_other_field_name</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">embeddedExampleField</span><span style="color: #339933;">;</span></pre>
+
+<h3 id="h:basic_embedded-documents:forcesave">How to force save of embedded document into collection</h3>
+
+<ul>
+<li>First we need to get the mongo collection object ie:
+
+<ul>
+<li><code>$collection = SomeModelClass::model()-&gt;getCollection();</code></li>
+<li><code>$collection = SomeModelClass::model()-&gt;getDb()-&gt;collectionName;</code></li>
+<li><code>$collection = Yii::app()-&gt;getComponent('mongodb')-&gt;getConnection()-&gt;collectionName;</code></li>
+</ul></li>
+<li>When we have our collection model, we now can force save of embedded document as a regular root document:
+
+<ul>
+<li><code>$collection-&gt;save($ourEmbeddedModel-&gt;toArray());</code></li>
+</ul></li>
+</ul>
+<dl id="toc:basic_arrays" class="location location-middle"><dt><a href="#toc:basic">4. Basic Usage</a><br/>4.4. Arrays</dt><dd class="prev">4.3. Embedded Documents<br/><a href="#toc:basic_embedded-documents">&laquo; Previous</a></dd><dd class="next">4.4.1. Simple Arrays<br/><a href="#toc:basic_arrays_simple">Next &raquo;</a></dd></dl>	<h1>4.4. Arrays</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>You can in extreme simple way store any arrays in MongoDB, next sections will describe how to get it done.</p>
+<dl id="toc:basic_arrays_simple" class="location location-middle"><dt><a href="#toc:basic_arrays">4.4. Arrays</a><br/>4.4.1. Simple Arrays</dt><dd class="prev">4.4. Arrays<br/><a href="#toc:basic_arrays">&laquo; Previous</a></dd><dd class="next">4.4.2. Array of Embedded Documents<br/><a href="#toc:basic_arrays_embedded-documents">Next &raquo;</a></dd></dl>	<h1>4.4.1. Simple Arrays</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p><strong>Just define a property in yours model, and store an array in it! YES This is that simple</strong></p>
+
+<p>Example:</p>
+
+<pre class="php"><span style="color: #000000; font-weight: bold;">class</span> User <span style="color: #000000; font-weight: bold;">extends</span> EMongoDocument
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #666666; font-style: italic;">// ...</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$myArray</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// ...</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000088;">$myArray</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'our'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'simple'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'example'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'array'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$user</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> User<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">myArray</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$myArray</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">save</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">// that's it!</span>
+<span style="color: #666666; font-style: italic;">// in any time after when you get yours model form DB</span>
+<span style="color: #000088;">$user</span> <span style="color: #339933;">=</span> User<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">myArray</span><span style="color: #009900;">&#91;</span>1<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">// will return 'simple' </span></pre>
+<dl id="toc:basic_arrays_embedded-documents" class="location location-middle"><dt><a href="#toc:basic_arrays">4.4. Arrays</a><br/>4.4.2. Array of Embedded Documents</dt><dd class="prev">4.4.1. Simple Arrays<br/><a href="#toc:basic_arrays_simple">&laquo; Previous</a></dd><dd class="next">5. Querying<br/><a href="#toc:querying">Next &raquo;</a></dd></dl>	<h1>4.4.2. Array of Embedded Documents</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p><em>There is no way (that I know) where I can easily provide mechanism for this, you have to write Your own</em></p>
+
+<p>This is how I accomplish it for now.</p>
+
+<p>Within suite package you should have and <code>extra</code> folder that contains (not only)
+<code>EEmbeddedArraysBehavior</code> class, we can use it to store an arrays of embedded documents.</p>
+
+<p>Example:</p>
+
+<pre class="php"><span style="color: #000000; font-weight: bold;">class</span> User <span style="color: #000000; font-weight: bold;">extends</span> EMongoDocument
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #666666; font-style: italic;">// ...</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// Add property for storing array</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$addresses</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// Add EEmbeddedArraysBehavior</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> behaviors<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+            <span style="color: #0000ff;">'embeddedArrays'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+                <span style="color: #0000ff;">'class'</span><span style="color: #339933;">=&gt;</span><span style="color: #0000ff;">'ext.YiiMongoDbSuite.extra.EEmbeddedArraysBehavior'</span><span style="color: #339933;">,</span>
+                <span style="color: #0000ff;">'arrayPropertyName'</span><span style="color: #339933;">=&gt;</span><span style="color: #0000ff;">'addresses'</span><span style="color: #339933;">,</span>       <span style="color: #666666; font-style: italic;">// name of property, that will be used as an array</span>
+                <span style="color: #0000ff;">'arrayDocClassName'</span><span style="color: #339933;">=&gt;</span><span style="color: #0000ff;">'ClientAddress'</span>    <span style="color: #666666; font-style: italic;">// class name of embedded documents in array</span>
+            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// ...</span>
+<span style="color: #009900;">&#125;</span></pre>
+
+<p>Now you can use property arrays as an array of embedded documents:</p>
+
+<pre class="php"><span style="color: #000088;">$user</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> User<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addresses</span><span style="color: #009900;">&#91;</span>0<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> ClientAddress<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addresses</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">city</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'New York'</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">save</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// Behavior will automatically handle of validation, saving etc.</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// OR:</span>
+&nbsp;
+<span style="color: #000088;">$user</span> <span style="color: #339933;">=</span> User<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #b1b100;">foreach</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$user</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addresses</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$userAddress</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #b1b100;">echo</span> <span style="color: #000088;">$userAddress</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">city</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre>
+<dl id="toc:querying" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>5. Querying</dt><dd class="prev">4.4.2. Array of Embedded Documents<br/><a href="#toc:basic_arrays_embedded-documents">&laquo; Previous</a></dd><dd class="next">5.1. Simple queries<br/><a href="#toc:querying_simple-queries">Next &raquo;</a></dd></dl>	<h1>5. Querying</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This is one of the things that makes this extension great. It's very easy to query for the objects you want.</p>
+
+<p>This section covers all possibilities of querying the DB for results.</p>
+
+<p>Basically this covers usage of <code>EMongoCriteria</code> object.</p>
+<dl id="toc:querying_simple-queries" class="location location-middle"><dt><a href="#toc:querying">5. Querying</a><br/>5.1. Simple queries</dt><dd class="prev">5. Querying<br/><a href="#toc:querying">&laquo; Previous</a></dd><dd class="next">5.2. The EMongoCriteria Object<br/><a href="#toc:querying_criteria-object">Next &raquo;</a></dd></dl>	<h1>5.1. Simple queries</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>You can use methods that you have used to with standard Yii <code>CActiveRecord</code>'s</p>
+
+<ul>
+<li>To find only one first matched document simply call</li>
+</ul>
+
+<p><code>$model = ModelClass::model()-&gt;find()</code></p>
+
+<ul>
+<li>To find document that has some arguments set call </li>
+</ul>
+
+<p><code>$model = ModelClass::model()-&gt;findByAttributes(array('attributeName'=&gt;'attributeValue', 'attribute2'=&gt;'otherValue'))</code></p>
+
+<ul>
+<li>You can search models by theyre primary key</li>
+</ul>
+
+<p><code>$model = ModelClass::model()-&gt;findByPk(new MongoID(/* ... */))</code></p>
+
+<p>To understand PK queries refer to [Primary Keys Section][advanced.primaryKeys]</p>
+
+<ul>
+<li>All of above methods have the 'All' version, ie: <code>findAll()</code>, <code>findAllByAttributes</code></li>
+<li>They may return an array of models, or models cursor, we'll cover the cursor later</li>
+</ul>
+
+<p><strong>This is almost the same behavior like standard Yii ActiveRecord models, refer to them for a basic idea</strong></p>
+<dl id="toc:querying_criteria-object" class="location location-middle"><dt><a href="#toc:querying">5. Querying</a><br/>5.2. The EMongoCriteria Object</dt><dd class="prev">5.1. Simple queries<br/><a href="#toc:querying_simple-queries">&laquo; Previous</a></dd><dd class="next">6. The Advanced Stuff<br/><a href="#toc:advanced">Next &raquo;</a></dd></dl>	<h1>5.2. The EMongoCriteria Object</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>By default MongoDB requires to build advanced query arrays if you want advanced search for documents in DB.</p>
+
+<p>The EMongoCriteria object simplifies process of building this query arrays.</p>
+
+<p>First of all create the object instance: <code>$criteria = new EMongoCriteria();</code></p>
+
+<p>You may define query criteria in three simple ways:</p>
+
+<ol>
+<li>Simple 'equlas' condition, that is equivalent of SQL: <code>WHERE fieldName = 'fieldValue'</code>:
+
+<ul>
+<li><code>$criteria-&gt;fieldName = 'fieldValue';</code></li>
+</ul></li>
+<li>By field name call ie. SQL: <code>WHERE fieldName &gt; 1234</code>:
+
+<ul>
+<li><code>$criteria-&gt;fieldName('&gt;', 1234);</code></li>
+</ul></li>
+<li>By addCond method ie. SQL: <code>WHERE fieldName &lt;= 1234</code>:
+
+<ul>
+<li><code>$criteria-&gt;addCond('fieldName', '&lt;=', 1234);</code></li>
+</ul></li>
+</ol>
+
+<p>You can add multiple conditions, using any of the above techniques, they will be mixed together.</p>
+
+<p>In addition to above the criteria object has additional special methods.</p>
+
+<ol>
+<li><code>limit($value)</code> that takes as parameter the query results limit, same as SQL <code>LIMIT</code> directive</li>
+<li><code>offset($value)</code> that takes as parameter the query results offset to get, same as SQL <code>LIMIT</code> directive second parameter</li>
+<li><code>sort($fieldName, $sortDirection)</code> this will be covered shortly</li>
+<li><code>select($array)</code> this will be covered shortly</li>
+</ol>
+
+<p><strong>NOTE: If you want to add simple criteria, that will use field name that is a method name from the above list,
+you can use the addCond method ie. <code>$criteria-&gt;addCond('limit', '==', 1234);</code></strong></p>
+
+<h3 id="h:querying_criteria-object:sort">sort EMongoCriteria method</h3>
+
+<p>The sort method takes two parameters</p>
+
+<ul>
+<li>first is a field name, to use for sorting</li>
+<li>second is a sort direction, witch may be one of:
+
+<ol>
+<li><code>EMongoCriteria::SORT_ASC</code> for ascending sorting (positive value 1)</li>
+<li><code>EMongoCriteria::SORT_DESC</code> for descending sorting (negative value -1)</li>
+</ol></li>
+</ul>
+
+<p>You can call sort method as many times as you wish, the sorting criteria will be mixed together.</p>
+
+<h3 id="h:querying_criteria-object:select">select EMongoCriteria method</h3>
+
+<p>The select method takes only one argument, array of field names.</p>
+
+<p>By default MongoDB will return all fields from of document, use this method to tell mongo that
+you want only specified field list.</p>
+
+<p><strong>NOTE:</strong></p>
+
+<ul>
+<li>MongoDB regardless of anything, will always return the _id field within result sets</li>
+<li>You can call sort method multiple times, all calls will be merged using array_merge function</li>
+</ul>
+
+<h3 id="h:querying_criteria-object:oplist">List of supported operators</h3>
+
+<p>List consist of operators and after <code>|</code> available shortcut (if any)</p>
+
+<p><em>NOTE: Operators are case-insensitive</em></p>
+
+<pre><code>- 'greater'   | &gt;
+- 'greaterEq' | &gt;=
+- 'less'      | &lt;
+- 'lessEq'    | &lt;=
+- 'notEq'     | !=, &lt;&gt;
+- 'in'        |
+- 'notIn'     |
+- 'all'       |
+- 'size'      |
+- 'exists'    |
+- 'notExists' |
+- 'type'      | // BSON type see mongodb docs for this
+- 'mod'       | %
+- 'equals'    | ==
+- 'elemMatch' |
+</code></pre>
+
+<p><em>NOTICE: the $or operator in newer versions of mongodb does NOT work with this extension yet. We will add it to the list above when it is fixed.</em></p>
+
+<p>Newer versions of mongodb will work, just not the $or operator.</p>
+
+<p>For examples and use for how to use these operators effectively, use the <a href="http://www.mongodb.org/display/DOCS/Advanced+Queries">MongoDB Operators Documentation here</a>.</p>
+
+<h3 id="h:querying_criteria-object:examples">Examples:</h3>
+
+<pre class="php"><span style="color: #666666; font-style: italic;">// first you must create a new criteria object</span>
+<span style="color: #000088;">$criteria</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> EMongoCriteria<span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// find the single user with the personal_number == 12345</span>
+<span style="color: #000088;">$criteria</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">personal_number</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'=='</span><span style="color: #339933;">,</span> 12345<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">// OR like this:</span>
+<span style="color: #000088;">$criteria</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">personal_number</span> <span style="color: #339933;">=</span> <span style="color: #cc66cc;">12345</span><span style="color: #339933;">;</span> 
+&nbsp;
+<span style="color: #000088;">$user</span> <span style="color: #339933;">=</span> User<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$criteria</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// find all users in New York. This will search in the embedded document of UserAddress</span>
+<span style="color: #000088;">$criteria</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">address</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">city</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'=='</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'New York'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">// Or</span>
+<span style="color: #000088;">$criteria</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">address</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">city</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'New York'</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$users</span> <span style="color: #339933;">=</span> User<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$criteria</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// Ok now try this. Only active users, only show at most 10 users, and sort by first name, descending, and offset by 20 (pagination):</span>
+<span style="color: #666666; font-style: italic;">// note the sort syntax. it must have an array value and use the =&gt; syntax.</span>
+<span style="color: #000088;">$criteria</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">status</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'=='</span><span style="color: #339933;">,</span> 1<span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">limit</span><span style="color: #009900;">&#40;</span>10<span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">sort</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'firstName'</span> <span style="color: #339933;">=&gt;</span> EMongoCriteria<span style="color: #339933;">::</span><span style="color: #004000;">SORT_DESC</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">offset</span><span style="color: #009900;">&#40;</span>20<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$users</span> <span style="color: #339933;">=</span> User<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$criteria</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// A more advanced case. All users with a personal_number evenly divisible by 10, sorted by first name ascending, limit 10 users, offset by 25 users (pagination), and remove any address fields from the returned result.</span>
+<span style="color: #000088;">$criteria</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">personal_number</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'%'</span><span style="color: #339933;">,</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">10</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #666666; font-style: italic;">// modulo =&gt; personal_number % 10 == 0</span>
+    <span style="color: #339933;">-&gt;</span><span style="color: #004000;">sort</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'firstName'</span> <span style="color: #339933;">=&gt;</span> EMongoCriteria<span style="color: #339933;">::</span><span style="color: #004000;">SORT_ASC</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #339933;">-&gt;</span><span style="color: #004000;">limit</span><span style="color: #009900;">&#40;</span>10<span style="color: #009900;">&#41;</span>
+    <span style="color: #339933;">-&gt;</span><span style="color: #004000;">offset</span><span style="color: #009900;">&#40;</span>25<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$users</span> <span style="color: #339933;">=</span> User<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$criteria</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+
+<h3 id="h:querying_criteria-object:regexp">Regexp / SQL LIKE replacement</h3>
+
+<p>You can use native PHP Mongo driver class MongoRegex, to query:</p>
+
+<pre class="php"><span style="color: #666666; font-style: italic;">// Create criteria</span>
+<span style="color: #000088;">$criteria</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> EMongoCriteria<span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">// Find all records witch have first name starring on a, b and c, case insensitive search</span>
+<span style="color: #000088;">$criteria</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">first_name</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> MongoRegex<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/[abc].*/i'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$clients</span> <span style="color: #339933;">=</span> Client<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$criteria</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">// see phpdoc for MongoRegex class for more examples</span></pre>
+
+<h3 id="h:querying_criteria-object:array">Creating criteria object from an array:</h3>
+
+<pre class="php"><span style="color: #666666; font-style: italic;">// Example criteria</span>
+<span style="color: #000088;">$array</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+    <span style="color: #0000ff;">'conditions'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span>
+        <span style="color: #666666; font-style: italic;">// field name =&gt; operator definition</span>
+        <span style="color: #0000ff;">'FieldName1'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'greaterEq'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #cc66cc;">10</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #666666; font-style: italic;">// Or 'FieldName1'=&gt;array('&gt;=' =&gt; 10)</span>
+        <span style="color: #0000ff;">'FieldName2'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'in'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">2</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">3</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'FieldName3'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'exists'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'limit'</span><span style="color: #339933;">=&gt;</span><span style="color: #cc66cc;">10</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'offset'</span><span style="color: #339933;">=&gt;</span><span style="color: #cc66cc;">25</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'sort'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'fieldName1'</span> <span style="color: #339933;">=&gt;</span> EMongoCriteria<span style="color: #339933;">::</span><span style="color: #004000;">SORT_ASC</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'fieldName4'</span> <span style="color: #339933;">=&gt;</span> EMongoCriteria<span style="color: #339933;">::</span><span style="color: #004000;">SORT_DESC</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$criteria</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> EMongoCriteria<span style="color: #009900;">&#40;</span><span style="color: #000088;">$array</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">// or</span>
+<span style="color: #000088;">$clients</span> <span style="color: #339933;">=</span> ClientModel<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$array</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+<dl id="toc:advanced" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>6. The Advanced Stuff</dt><dd class="prev">5.2. The EMongoCriteria Object<br/><a href="#toc:querying_criteria-object">&laquo; Previous</a></dd><dd class="next">6.1. Indexing<br/><a href="#toc:advanced_indexing">Next &raquo;</a></dd></dl>	<h1>6. The Advanced Stuff</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>YiiMongoDbSuite enables you to do even more fun things!</p>
+<dl id="toc:advanced_indexing" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.1. Indexing</dt><dd class="prev">6. The Advanced Stuff<br/><a href="#toc:advanced">&laquo; Previous</a></dd><dd class="next">6.2. Primary Keys<br/><a href="#toc:advanced_primary-key">Next &raquo;</a></dd></dl>	<h1>6.1. Indexing</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>Now you can define indexes for yours collections in easy way!</p>
+
+<p>Suite will check for existing of indexes only once, at the first class use, (per script-calls)
+if it not find any of declared indexes it will create them</p>
+
+<p>Only thing you need is to define the indexes() method in yours model class, see the example:</p>
+
+<pre class="php"><span style="color: #000000; font-weight: bold;">class</span> Client <span style="color: #000000; font-weight: bold;">extends</span> EMongoDocument
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #666666; font-style: italic;">// ....</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> indexes<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+            <span style="color: #666666; font-style: italic;">// index name is not important, you may write whatever you want, just must be unique</span>
+            <span style="color: #0000ff;">'index1_name'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span>
+                <span style="color: #666666; font-style: italic;">// key array holds list of fields for index</span>
+                <span style="color: #666666; font-style: italic;">// you may define multiple keys for index and multikey indexes</span>
+                <span style="color: #666666; font-style: italic;">// each key must have a sorting direction SORT_ASC or SORT_DESC</span>
+                <span style="color: #0000ff;">'key'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span>
+                    <span style="color: #0000ff;">'field_name'</span><span style="color: #339933;">=&gt;</span>EMongoCriteria<span style="color: #339933;">::</span><span style="color: #004000;">SORT_ASC</span>
+                    <span style="color: #0000ff;">'field_name.embeded_field'</span><span style="color: #339933;">=&gt;</span>EMongoCriteria<span style="color: #339933;">::</span><span style="color: #004000;">SORT_DESC</span>
+                <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+&nbsp;
+                <span style="color: #666666; font-style: italic;">// unique, if indexed field must be unique, define a unique key</span>
+                <span style="color: #0000ff;">'unique'</span><span style="color: #339933;">=&gt;</span>true<span style="color: #339933;">,</span>
+            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+    <span style="color: #666666; font-style: italic;">// ....</span>
+<span style="color: #009900;">&#125;</span></pre>
+
+<p>If you whant to disable index existing checking on every page load,
+because of perfomance reasons (recomended for production)
+put <code>$this-&gt;ensureIndexes = false;</code> into yours <code>init()</code> method in model class.</p>
+
+<pre class="php"><span style="color: #000000; font-weight: bold;">class</span> Client <span style="color: #000000; font-weight: bold;">extends</span> EMongoDocument
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #666666; font-style: italic;">// ....</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> init<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">ensureIndexes</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+    <span style="color: #666666; font-style: italic;">// ....</span>
+<span style="color: #009900;">&#125;</span></pre>
+<dl id="toc:advanced_primary-key" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.2. Primary Keys</dt><dd class="prev">6.1. Indexing<br/><a href="#toc:advanced_indexing">&laquo; Previous</a></dd><dd class="next">6.3. Named Scopes<br/><a href="#toc:advanced_named-scopes">Next &raquo;</a></dd></dl>	<h1>6.2. Primary Keys</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>By default YiiMongoDbSuite will always use the <code>_id</code> field as a collection primary key.</p>
+
+<p>MongoDB itself guarantee that this field will be unique across collection.</p>
+
+<h2 id="h:advanced_primary-key:_id">The <code>_id</code> field</h2>
+
+<p>The <code>_id</code> field in a short is, be default an instance of <code>MongoID</code> class.</p>
+
+<p>If you will do <code>echo $model-&gt;_id</code> you will see something like: <code>'4ced75e1eb4ae8ca44000000'</code></p>
+
+<p>This is basically, the textual representation of auto-generated by MongoDB _id field.</p>
+
+<p><strong>But be aware that MongoID is not a string!</strong></p>
+
+<p><em>This will not find anything! <code>$model-&gt;findByPk('4ced75e1eb4ae8ca44000000');</code></em></p>
+
+<p>To find an model with specified ID use:</p>
+
+<p><code>$model-&gt;findByPk(new MongoID('4ced75e1eb4ae8ca44000000'));</code></p>
+
+<p><em>NOTE: You can put any value into an <code>_id</code> field, as long as it will be unique across whole collection,
+mongo will create the MongoID object, only if you insert new model to the DB, with _id field set to <code>NULL</code></em></p>
+
+<h2 id="h:advanced_primary-key:ownpk">Own defined Primary Key for collection</h2>
+
+<p>You can define a own field to be used as a Primary Key for yours collection, see example:</p>
+
+<pre class="php"><span style="color: #000000; font-weight: bold;">class</span> Client <span style="color: #000000; font-weight: bold;">extends</span> EMongoDocument
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #666666; font-style: italic;">// ...</span>
+    <span style="color: #666666; font-style: italic;">// Define primaryKey method:</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> primaryKey<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">'personal_number'</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// Model field name, by default the _id field is used</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// Now you can:</span>
+    <span style="color: #666666; font-style: italic;">// Client::model()-&gt;findByPk(1234); // personal_number == 1234</span>
+    <span style="color: #666666; font-style: italic;">// ...</span>
+<span style="color: #009900;">&#125;</span></pre>
+<dl id="toc:advanced_named-scopes" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.3. Named Scopes</dt><dd class="prev">6.2. Primary Keys<br/><a href="#toc:advanced_primary-key">&laquo; Previous</a></dd><dd class="next">6.4. Relations<br/><a href="#toc:advanced_relations">Next &raquo;</a></dd></dl>	<h1>6.3. Named Scopes</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>Now you can use AR style named scopes just define scopes method in yours model:</p>
+
+<pre class="php"><span style="color: #000000; font-weight: bold;">class</span> Client <span style="color: #000000; font-weight: bold;">extends</span> EMongoDocument
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #666666; font-style: italic;">// (...)</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> scopes<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+            <span style="color: #0000ff;">'scopeName'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #666666; font-style: italic;">/* Array for criteria object creation see Criteria from array topic */</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> defaultScope<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+            <span style="color: #0000ff;">'conditions'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span>
+                <span style="color: #0000ff;">'active'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'=='</span><span style="color: #339933;">,</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// (...)</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// now You can:</span>
+<span style="color: #666666; font-style: italic;">// this will find only clients that are active (default scope) and clients matching 'scopeName'</span>
+<span style="color: #000088;">$all</span> <span style="color: #339933;">=</span> Client<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">scopeName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+
+<h2 id="h:advanced_named-scopes:pns">Parameterized Named Scopes</h2>
+
+<pre class="php"><span style="color: #000000; font-weight: bold;">class</span> Client <span style="color: #000000; font-weight: bold;">extends</span> EMongoDocument
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #666666; font-style: italic;">// (...)</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> byStatus<span style="color: #009900;">&#40;</span><span style="color: #000088;">$status</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #000088;">$criteria</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getDbCriteria</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000088;">$criteria</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">status</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$status</span><span style="color: #339933;">;</span>
+        <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setDbCriteria</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$criteria</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// (...)</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// now You can:</span>
+<span style="color: #666666; font-style: italic;">// this will find only clients that have status set to parameter value:</span>
+<span style="color: #000088;">$all</span> <span style="color: #339933;">=</span> Client<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">byStatus</span><span style="color: #009900;">&#40;</span>1<span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+
+<p><em>NOTE: You can chain multiple named scopes ie. <code>Client::model()-&gt;active()-&gt;byStatus(1)-&gt;findAll();</code></em></p>
+<dl id="toc:advanced_relations" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.4. Relations</dt><dd class="prev">6.3. Named Scopes<br/><a href="#toc:advanced_named-scopes">&laquo; Previous</a></dd><dd class="next">6.5. Data Provider Object<br/><a href="#toc:advanced_data-provider">Next &raquo;</a></dd></dl>	<h1>6.4. Relations</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><ul>
+<li>In NoSQL World Relations are not so obvious as in RDBMS</li>
+<li>Because NoSQL databases are designed for performance, there is no need of defining something more complex than correct use of find() method and indexing for fetching related records</li>
+<li>This is just an <em>idea/concept/example</em> you can do things in yours preferred way! this is schema-less world, think different!</li>
+<li>MongoDB Documentation has a clean examples and how-to's for handling relations, <em>please</em> read them for better understanding of relations in NoSQL world</li>
+</ul>
+
+<h2 id="h:advanced_relations:hasone">HAS_ONE relation</h2>
+
+<pre class="php"><span style="color: #666666; font-style: italic;">// just define method in yours model class (assume we have client collection, and address collection in client model</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> address<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #b1b100;">return</span> Address<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findByAttributes</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'attribute_with_client_id'</span><span style="color: #339933;">=&gt;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">primaryKey</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre>
+
+<h2 id="h:advanced_relations:belongsto">BELONGS_TO relation</h2>
+
+<pre class="php"><span style="color: #666666; font-style: italic;">// define in address model</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> client<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #b1b100;">return</span> Client<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findByPk</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">attribute_with_client_id</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre>
+
+<h2 id="h:advanced_relations:hasmany">HAS_MANY relation</h2>
+
+<pre class="php">&nbsp;
+&nbsp;
+<span style="color: #666666; font-style: italic;">// assume we have clients and orders collection</span>
+<span style="color: #666666; font-style: italic;">// define in client:</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> orders<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #b1b100;">return</span> Client<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAllByAttributes</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'client_id'</span><span style="color: #339933;">=&gt;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">primaryKey</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre>
+
+<h2 id="h:advanced_relations:manymany">MANY_MANY relation</h2>
+
+<p>As simple as defining reverse HAS_MANY relation in orders model. You can view the Example models for details.</p>
+<dl id="toc:advanced_data-provider" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.5. Data Provider Object</dt><dd class="prev">6.4. Relations<br/><a href="#toc:advanced_relations">&laquo; Previous</a></dd><dd class="next">6.6. Write Queries Flags<br/><a href="#toc:advanced_write-flags">Next &raquo;</a></dd></dl>	<h1>6.5. Data Provider Object</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><pre class="php"><span style="color: #666666; font-style: italic;">// basic dataprovider returns whole collection (with efficient pagination support out-of-box)</span>
+<span style="color: #000088;">$dp</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> EMongoDocumentDataProvider<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'modelClassNameOrInstance'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// data provider with query</span>
+<span style="color: #000088;">$dp</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> EMongoDocumentDataProvider<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'modelClassNameOrInstance'</span><span style="color: #339933;">,</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+    <span style="color: #0000ff;">'conditions'</span><span style="color: #339933;">=&gt;</span><span style="color: #666666; font-style: italic;">/* query array goes here */</span>
+<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// data provider, enable sorting (needs to be set explicit)</span>
+<span style="color: #000088;">$dp</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> EMongoDocumentDataProvider<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'modelClassNameOrInstance'</span><span style="color: #339933;">,</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+    <span style="color: #666666; font-style: italic;">/* standard config array */</span>
+    <span style="color: #0000ff;">'conditions'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #666666; font-style: italic;">/* query array goes here */</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #0000ff;">'sort'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span>
+        <span style="color: #0000ff;">'attributes'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span>
+            <span style="color: #666666; font-style: italic;">// list of sortable attributes</span>
+        <span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+<dl id="toc:advanced_write-flags" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.6. Write Queries Flags</dt><dd class="prev">6.5. Data Provider Object<br/><a href="#toc:advanced_data-provider">&laquo; Previous</a></dd><dd class="next">6.7. GridFS<br/><a href="#toc:advanced_gridfs">Next &raquo;</a></dd></dl>	<h1>6.6. Write Queries Flags</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>We now can set value for write queries flags FSync and/or Safe on a different scopes:</p>
+
+<ul>
+<li>Global scope, by setting it in EMongoDB component class itself (required)</li>
+<li>Model scope, bu using ModelClass::model()->setFsyncFlag($flagValue) or ModelClass::model()->setSafeFlag($flagValue)</li>
+<li>Single Model object by using $singleModelObject->sefFsyncFlag($flag) or $singleModelObject->sefSafeFlag($flag)</li>
+</ul>
+
+<p>State of write queries flags is connected</p>
+
+<ul>
+<li>Setting FSync to false, will set Safe flag to false automatically</li>
+<li>Setting Safe flag to true, will set FSync flag to true automatically </li>
+</ul>
+
+<p>Now, we may whant all DB operations to be synced to disk, and we set global FSync flag in MongoDB component config,
+but we feagure uot that, for ie. massive temporary models like DB logging objects are not important, and for performance
+reasons, we whant to disable FSync for this models only.</p>
+
+<p>We may do so: LogModelClass::model()->setFsyncFlag(false);</p>
+
+<p>From now on, all LogModelClass objects will be written to DB without waitng to filesystem sync.</p>
+
+<p>For user comfort, FSync and Safe flags may be set just for single model instance by, $singleModelInstance->setFsyncFlag(false),
+this will not affect any other model instance.</p>
+<dl id="toc:advanced_gridfs" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.7. GridFS</dt><dd class="prev">6.6. Write Queries Flags<br/><a href="#toc:advanced_write-flags">&laquo; Previous</a></dd><dd class="next">7. Gii Support<br/><a href="#toc:gii">Next &raquo;</a></dd></dl>	<h1>6.7. GridFS</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>You can use MongoDB GridFS feature to save big files within MongoDB collections.</p>
+
+<p>The first thing you need to do, it to define model for yours GridFS collection, see example:</p>
+
+<pre class="php"><span style="color: #000000; font-weight: bold;">class</span> Image <span style="color: #000000; font-weight: bold;">extends</span> EMongoGridFS
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #009933; font-style: italic;">/**
+     * This field is optional, but:
+     * from PHP MongoDB driver manual:
+     *
+     * 'You should be able to use any files created by MongoGridFS with any other drivers, and vice versa.
+     * However, some drivers expect that all metadata associated with a file be in a &quot;metadata&quot; field.
+     * If you're going to be using other languages, it's a good idea to wrap info you might want them
+     * to see in a &quot;metadata&quot; field.'
+     *
+     * @var array $metadata array of additional info/metadata about a file
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$metadata</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// this method should return the collection name for storing files</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> getCollectionName<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">'images'</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// normal rules method, if you use metadata field, set it as a 'safe' attribute</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> rules<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+            <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'filename, metadata'</span><span style="color: #339933;">,</span><span style="color: #0000ff;">'safe'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+            <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'filename'</span><span style="color: #339933;">,</span><span style="color: #0000ff;">'required'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #009933; font-style: italic;">/**
+     * Just like normal ActiveRecord/EMongoDocument classes
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> static <span style="color: #000000; font-weight: bold;">function</span> model<span style="color: #009900;">&#40;</span><span style="color: #000088;">$className</span><span style="color: #339933;">=</span><span style="color: #009900; font-weight: bold;">__CLASS__</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> parent<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$className</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre>
+
+<p><strong>IMPORTANT: every EMongoGridFS has a special field "filename", that is mandatory!</strong></p>
+
+<p>This part of documentation is not yet complete, for now, follow usage examples:</p>
+
+<pre class="php">Yii<span style="color: #339933;">::</span><span style="color: #004000;">import</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'ext.YiiMongoDbSuite.examples.MongoImage'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//create a new image</span>
+<span style="color: #000088;">$image</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> MongoImage<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">filename</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'/var/www/myImage.JPG'</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">metadata</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'value1'</span><span style="color: #339933;">=&gt;</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'value2'</span><span style="color: #339933;">=&gt;</span>2<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$res</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">save</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$res</span> <span style="color: #339933;">!==</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">'error saving file'</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//find image</span>
+&nbsp;
+<span style="color: #000088;">$image</span> <span style="color: #339933;">=</span> MongoImage<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$image</span> instanceof MongoImage<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">'error finding object'</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//findall images</span>
+&nbsp;
+<span style="color: #000088;">$images</span> <span style="color: #339933;">=</span> MongoImage<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span><a href="http://www.php.net/is_array"><span style="color: #990000;">is_array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$images</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">'error on findall'</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//delete images</span>
+&nbsp;
+<span style="color: #000088;">$image</span> <span style="color: #339933;">=</span> MongoImage<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$image</span> instanceof MongoImage<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">delete</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$result</span> <span style="color: #339933;">!==</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">'delete notok'</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #b1b100;">else</span>
+    <span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">'no image found to delete'</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//deleteAll images</span>
+&nbsp;
+<span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> MongoImage<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">deleteAll</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/is_array"><span style="color: #990000;">is_array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$result</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">===</span><span style="color: #009900; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">' isarray'</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/isset"><span style="color: #990000;">isset</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$result</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'err'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">===</span> <span style="color: #009900; font-weight: bold;">true</span> <span style="color: #009900;">&#41;</span>
+        <span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">' error deleting images:'</span><span style="color: #339933;">.</span><span style="color: #000088;">$result</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'err'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">else</span>
+        <span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">' elements deleted:'</span><span style="color: #339933;">.</span><span style="color: #000088;">$result</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'n'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//deletebyPk image</span>
+<span style="color: #000088;">$image</span> <span style="color: #339933;">=</span> MongoImage<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$image</span> instanceof MongoImage<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> MongoImage<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">deleteByPk</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span>_id<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$result</span> <span style="color: #339933;">!==</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">'error'</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #b1b100;">else</span>
+    <span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">'no image found to delete by pk'</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//insert image and update</span>
+&nbsp;
+<span style="color: #000088;">$image</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> MongoImage<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">filename</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'/var/www/myImage.JPG'</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">metadata</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'value1'</span><span style="color: #339933;">=&gt;</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'value2'</span><span style="color: #339933;">=&gt;</span>2<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$res</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">save</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">filename</span> <span style="color: #339933;">=</span>  <span style="color: #0000ff;">'/var/www/myImageUpdated.JPG'</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">metadata</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'value1'</span><span style="color: #339933;">=&gt;</span><span style="color: #cc66cc;">3</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'value2'</span><span style="color: #339933;">=&gt;</span>4<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$res</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">save</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$res</span> <span style="color: #339933;">!==</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">'error updating'</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//MongoGridFSFile functions</span>
+&nbsp;
+<span style="color: #000088;">$image</span> <span style="color: #339933;">=</span> MongoImage<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//getBytes function</span>
+&nbsp;
+<span style="color: #000088;">$bytes</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getBytes</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//getFilename</span>
+&nbsp;
+<span style="color: #000088;">$filename</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getFilename</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//getSize</span>
+&nbsp;
+<span style="color: #000088;">$size</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getSize</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//write</span>
+&nbsp;
+<span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">write</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+<dl id="toc:gii" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>7. Gii Support</dt><dd class="prev">6.7. GridFS<br/><a href="#toc:advanced_gridfs">&laquo; Previous</a></dd><dd class="next">8. Special Topics<br/><a href="#toc:special">Next &raquo;</a></dd></dl>	<h1>7. Gii Support</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><h2 id="h:gii:model">Model generation</h2>
+
+<ul>
+<li>you do not have to generate yours models, yours classes are yours models and schemas!</li>
+<li>Gii CAN'T generate models for you! there is no schema witch gii can exam for generation</li>
+</ul>
+
+<h2 id="h:gii:crud">CRUD Generation</h2>
+
+<p>Now you can generate CRUD for yours MongoDB Documents! just you have to add generator path to yours Gii config</p>
+
+<p><em>Important:</em> By default generated models will use mongo _id field as a primary key (using MongoId class)
+this generator will use different field as a primary key, if you will override primaryKey() method to return
+something different than '_id'. Note that generator cannot handle with multifield primary key,</p>
+
+<pre class="php"><span style="color: #666666; font-style: italic;">// in yours main.php config file:</span>
+<span style="color: #0000ff;">'modules'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span>
+    <span style="color: #666666; font-style: italic;">// ...</span>
+&nbsp;
+    <span style="color: #0000ff;">'gii'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span>
+        <span style="color: #0000ff;">'class'</span><span style="color: #339933;">=&gt;</span><span style="color: #0000ff;">'system.gii.GiiModule'</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'password'</span><span style="color: #339933;">=&gt;</span><span style="color: #0000ff;">'yours_password_to_gii'</span><span style="color: #339933;">,</span>
+        <span style="color: #666666; font-style: italic;">// add additional generator path</span>
+        <span style="color: #0000ff;">'generatorPaths'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span>
+            <span style="color: #0000ff;">'ext.YiiMongoDbSuite.gii'</span>
+        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// ...</span>
+<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<span style="color: #666666; font-style: italic;">// Now login to Gii and start using Mongocrud generator !</span></pre>
+
+<h2 id="h:gii:forms">Forms generation</h2>
+
+<ul>
+<li>This is a good news, Gii can generate the worst part of developer job, forms for mongo records ;]</li>
+<li>When generating a form from mongo record, comment out embedded docs array, or you'll see error about array/object creation</li>
+<li>For embedded docs just generate forms in separed way for each one</li>
+</ul>
+<dl id="toc:special" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>8. Special Topics</dt><dd class="prev">7. Gii Support<br/><a href="#toc:gii">&laquo; Previous</a></dd><dd class="next">8.1. Multimodel Collections<br/><a href="#toc:special_multimodel">Next &raquo;</a></dd></dl>	<h1>8. Special Topics</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This section covers some special topics, that need to bye mentioned</p>
+
+<h2 id="h:special:behaviors">Behaviors</h2>
+
+<ul>
+<li>You can use existing CActiveRecordBehaviors as long as they do not mess up with CActiveRecord explicit stuff (ie. behaviors that add relation handling will fail to work with EMongoDocuments)</li>
+<li>Behaviors may extend from EMongoDocumentBehavior class, standard AR behavior class can't use extra events witch are available here (beforeEmbeddedDocsInit, afterEmbeddedDocsInit, beforeToArray and afterToArray)</li>
+</ul>
+
+<h2 id="h:special:performance">Performance</h2>
+
+<ul>
+<li>By default all save/update/delete operations performed by internal command sets the FSYNC flag to TRUE, this means, all operations will have to wait for a disk sync!</li>
+<li>FSYNC in most cases is a good way and do not have massive impact on performance</li>
+<li>You may want to disable FSYNC flag when doing massive imports/updates/models, because it will be <strong>horrible</strong> slow!</li>
+<li>Fsync can be disabled by setting up fsyncField in EMongoDB class</li>
+</ul>
+
+<h2 id="h:special:useCursorFlag">Use Cursor Flag</h2>
+
+<p>Now we can set that all records returned by findAll* methods will return EMongoCursor instead of raw array,
+EMongoCursor implements Iterator interface and can be used with ie. foreach loop.</p>
+
+<p>EMongoCursor will instantiate objects in lazy-loading way, only on first use.</p>
+
+<p>By default useCursor flag is set to FALSE to keep backwards compatibility, note:
+- <strong>Cursor does not implement ArrayAccess interface, because offset access to cursor is very ineffective, and pointless</strong> 
+- You can set useCursor flag in different scopes
+    - globally in EMongoDB class, by setting $useCursor variable
+    - Per model: ModelClass::model()->setUseCursor(true);
+    - And per model instance: $modelInstance->setUseCursor(true);</p>
+
+<h2 id="h:special:masshand">Massive hand operations</h2>
+
+<pre class="php"><span style="color: #666666; font-style: italic;">// Example mass insert (you will want to disable fsyncField for this:</span>
+<span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$i</span><span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> <span style="color: #000088;">$i</span><span style="color: #339933;">&lt;</span><span style="color: #cc66cc;">1000</span><span style="color: #339933;">;</span> <span style="color: #000088;">$i</span><span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #000088;">$c</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Client<span style="color: #339933;">;</span>
+    <span style="color: #000088;">$c</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">personal_number</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$i</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$c</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">validate</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// You can omit this if you want</span>
+    <span style="color: #000088;">$c</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getCollection</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">insert</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$c</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">toArray</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre>
+<dl id="toc:special_multimodel" class="location location-middle"><dt><a href="#toc:special">8. Special Topics</a><br/>8.1. Multimodel Collections</dt><dd class="prev">8. Special Topics<br/><a href="#toc:special">&laquo; Previous</a></dd></dl>	<h1>8.1. Multimodel Collections</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>You can have different models in single collection, example:</p>
+
+<pre class="php"><span style="color: #000000; font-weight: bold;">class</span> Client <span style="color: #000000; font-weight: bold;">extends</span> EMongoDocument
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$first_name</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$second_name</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// define property for finding type</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$type</span><span style="color: #339933;">;</span>
+    <span style="color: #666666; font-style: italic;">// and some const for better remember</span>
+    <span style="color: #000000; font-weight: bold;">const</span> NORMAL_CLIENT <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">const</span> BUSINESS_CLIENT <span style="color: #339933;">=</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> getCollectionName<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">'clients'</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #009933; font-style: italic;">/**
+     * We can override the instantiate method to return correct models
+     */</span>
+    protected <span style="color: #000000; font-weight: bold;">function</span> instantiate<span style="color: #009900;">&#40;</span><span style="color: #000088;">$attributes</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$attributes</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'type'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">==</span> <span style="color: #000000; font-weight: bold;">self</span><span style="color: #339933;">::</span><span style="color: #004000;">NORMAL_CLIENT</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #000088;">$model</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> NormalClient<span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// We have to set scenario to null, it will be set, by populateRecord, later</span>
+        <span style="color: #b1b100;">else</span> <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$attributes</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'type'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">==</span> <span style="color: #000000; font-weight: bold;">self</span><span style="color: #339933;">::</span><span style="color: #004000;">BUSINESS_CLIENT</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #000088;">$model</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> BusinessClient<span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">initEmbeddedDocuments</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// We have to do it manually here!</span>
+        <span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setAttributes</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$attributes</span><span style="color: #339933;">,</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #b1b100;">return</span> <span style="color: #000088;">$model</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> static <span style="color: #000000; font-weight: bold;">function</span> model<span style="color: #009900;">&#40;</span><span style="color: #000088;">$className</span><span style="color: #339933;">=</span><span style="color: #009900; font-weight: bold;">__CLASS__</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> parent<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$className</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> NormalClient <span style="color: #000000; font-weight: bold;">extends</span> Client
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$additionalField</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> defaultScope<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+            <span style="color: #0000ff;">'conditions'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'type'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'=='</span><span style="color: #339933;">,</span> <span style="color: #000000; font-weight: bold;">self</span><span style="color: #339933;">::</span><span style="color: #004000;">NORMAL_CLIENT</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> beforeSave<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>parent<span style="color: #339933;">::</span><span style="color: #004000;">beforeSave</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #009900;">&#123;</span>
+            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">type</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">self</span><span style="color: #339933;">::</span><span style="color: #004000;">NORMAL_CLIENT</span><span style="color: #339933;">;</span>
+            <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+        <span style="color: #b1b100;">else</span> <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> static <span style="color: #000000; font-weight: bold;">function</span> model<span style="color: #009900;">&#40;</span><span style="color: #000088;">$className</span><span style="color: #339933;">=</span><span style="color: #009900; font-weight: bold;">__CLASS__</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> parent<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$className</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> BusinessClient <span style="color: #000000; font-weight: bold;">extends</span> Client
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$taxNo</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> defaultScope<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+            <span style="color: #0000ff;">'conditions'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'type'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'=='</span><span style="color: #339933;">,</span> <span style="color: #000000; font-weight: bold;">self</span><span style="color: #339933;">::</span><span style="color: #004000;">BUSINESS_CLIENT</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> beforeSave<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>parent<span style="color: #339933;">::</span><span style="color: #004000;">beforeSave</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #009900;">&#123;</span>
+            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">type</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">self</span><span style="color: #339933;">::</span><span style="color: #004000;">BUSINESS_CLIENT</span><span style="color: #339933;">;</span>
+            <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+        <span style="color: #b1b100;">else</span> <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> static <span style="color: #000000; font-weight: bold;">function</span> model<span style="color: #009900;">&#40;</span><span style="color: #000088;">$className</span><span style="color: #339933;">=</span><span style="color: #009900; font-weight: bold;">__CLASS__</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> parent<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$className</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre>
+
+<p>Now we can:</p>
+
+<pre class="php"><span style="color: #666666; font-style: italic;">// now you can:</span>
+<span style="color: #000088;">$bclients</span> <span style="color: #339933;">=</span> BuissnessClient<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$clients</span> <span style="color: #339933;">=</span> NormalClient<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$allClients</span> <span style="color: #339933;">=</span> Client<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// but they're kept in single collection ! and can be indexed with single field etc.</span></pre>
+	</div>
+	
+	<div id="footer">
+		<p>Copyright &copy; <a href="http://www.cleverit.com.pl">2010 CleverIT</a></p>
+		<p>Available under the terms of license: <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation License 2.1</a></p>
+		<p>Generated by <strong>TypeFriendly 0.1.4</strong> by <a href="http://www.invenzzia.org/">Invenzzia</a></p>
+	</div>
+</div>
+
+</body>
+</html>
