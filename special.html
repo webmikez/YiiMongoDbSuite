@@ -23,28 +23,27 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
-</script>
-</head>
+</script></head>
 <body>
 
 <div id="wrap">
 	<div id="header">
 		<h1>YiiMongoDbSuite Manual 1.3.3</h1>
 		<h2>Special Topics</h2>
-		<p class="generated">@ 25.12.2010</p>
+		<p class="generated">@ 26.12.2010</p>
 		<p class="location"><a href="index.html"><strong>User manual</strong></a> &raquo; <a href="special.html">Special Topics</a></p>
 	</div>
 	
 	<div id="content"><dl class="location"><dt><a href="index.html">Table of Contents</a><br/>8. Special Topics</dt><dd class="prev">7. Gii Support<br/><a href="gii.html">&laquo; Previous</a></dd><dd class="next">8.1. Multimodel Collections<br/><a href="special.multimodel.html">Next &raquo;</a></dd></dl>	<h1>8. Special Topics</h1><h4>Table of Contents</h4><ul class="toc"><li><a href="special.multimodel.html">8.1. Multimodel Collections</a></li></ul><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This section covers some special topics, that need to bye mentioned</p>
 
-<h2>Behaviors</h2>
+<h2 id="h:special:behaviors">Behaviors</h2>
 
 <ul>
 <li>You can use existing CActiveRecordBehaviors as long as they do not mess up with CActiveRecord explicit stuff (ie. behaviors that add relation handling will fail to work with EMongoDocuments)</li>
 <li>Behaviors may extend from EMongoDocumentBehavior class, standard AR behavior class can't use extra events witch are available here (beforeEmbeddedDocsInit, afterEmbeddedDocsInit, beforeToArray and afterToArray)</li>
 </ul>
 
-<h2>Performance</h2>
+<h2 id="h:special:performance">Performance</h2>
 
 <ul>
 <li>By default all save/update/delete operations performed by internal command sets the FSYNC flag to TRUE, this means, all operations will have to wait for a disk sync!</li>
@@ -53,7 +52,7 @@
 <li>Fsync can be disabled by setting up fsyncField in EMongoDB class</li>
 </ul>
 
-<h2>Use Cursor Flag</h2>
+<h2 id="h:special:useCursorFlag">Use Cursor Flag</h2>
 
 <p>Now we can set that all records returned by findAll* methods will return EMongoCursor instead of raw array,
 EMongoCursor implements Iterator interface and can be used with ie. foreach loop.</p>
@@ -67,7 +66,7 @@ EMongoCursor implements Iterator interface and can be used with ie. foreach loop
     - Per model: ModelClass::model()->setUseCursor(true);
     - And per model instance: $modelInstance->setUseCursor(true);</p>
 
-<h2>Massive hand operations</h2>
+<h2 id="h:special:masshand">Massive hand operations</h2>
 
 <pre class="php"><span style="color: #666666; font-style: italic;">// Example mass insert (you will want to disable fsyncField for this:</span>
 <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$i</span><span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> <span style="color: #000088;">$i</span><span style="color: #339933;">&lt;</span><span style="color: #cc66cc;">1000</span><span style="color: #339933;">;</span> <span style="color: #000088;">$i</span><span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>

@@ -23,25 +23,24 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
-</script>
-</head>
+</script></head>
 <body>
 
 <div id="wrap">
 	<div id="header">
 		<h1>YiiMongoDbSuite Manual 1.3.3</h1>
 		<h2>Changelog</h2>
-		<p class="generated">@ 25.12.2010</p>
+		<p class="generated">@ 26.12.2010</p>
 		<p class="location"><a href="index.html"><strong>User manual</strong></a> &raquo; <a href="changelog.html">Changelog</a></p>
 	</div>
 	
-	<div id="content"><dl class="location"><dt><a href="index.html">Table of Contents</a><br/>2. Changelog</dt><dd class="prev">1. Introduction<br/><a href="introduction.html">&laquo; Previous</a></dd><dd class="next">3. Setup<br/><a href="setup.html">Next &raquo;</a></dd></dl>	<h1>2. Changelog</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This is the 1.3.x release (to be released)</p>
+	<div id="content"><dl class="location"><dt><a href="index.html">Table of Contents</a><br/>2. Changelog</dt><dd class="prev">1. Introduction<br/><a href="introduction.html">&laquo; Previous</a></dd><dd class="next">3. Setup<br/><a href="setup.html">Next &raquo;</a></dd></dl>	<h1>2. Changelog</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This is the 1.3.3 release</p>
 
-<p>New features in 1.3.x</p>
+<p>New features in 1.3.3</p>
 
 <ul>
-<li>Ability to set FSync and Safe flag on different scopes, see the "Write queries flags" documentation part</li>
-<li><strong>Ability to use efficent Cursors instead of raw array, returned by the findAll* methods</strong> see "Use Cursor Flag" documentation part</li>
+<li>Ability to set FSync and Safe flag on different scopes, see the <a href="advanced.write-flags.html" title="6.6. Write Queries Flags">Write queries flags</a> documentation part</li>
+<li><strong>Ability to use efficient Cursors instead of raw array, returned by the findAll* methods</strong> see <a href="special.html#h:special:useCursorFlag" title="8. Special Topics">Use Cursor Flag</a> documentation part</li>
 </ul>
 
 <p>New features in 1.3.2</p>
@@ -56,8 +55,8 @@
 
 <ul>
 <li>Fixed few major bugs in EMongoCriteria class</li>
-<li><em>Bugfixes to criteria object had forced to change the criteria object creation from array, please see the updated doc for it</em></li>
-<li>Fixed bug that in massive assign way, embeded documnets always used only safe attributes</li>
+<li><em>Bugfixes to criteria object had forced to change the criteria object creation from array, please see the <a href="querying.criteria-object.html#h:querying_criteria-object:array" title="5.2. The EMongoCriteria Object">updated doc</a> for it</em></li>
+<li>Fixed bug that in massive assign way, embedded documents always used only safe attributes</li>
 <li>Setup of PHPUnit testing framework</li>
 <li>Written test cases for EMongoDB class and EMongoCriteria class </li>
 </ul>
@@ -65,7 +64,7 @@
 <p>New features in 1.3</p>
 
 <ul>
-<li>MongoDB GridFS feature support, thanks to work of: Jose Martinez and Philippe Gaultier</li>
+<li>MongoDB <a href="advanced.gridfs.html" title="6.7. GridFS">GridFS feature support</a>, thanks to work of: Jose Martinez and Philippe Gaultier</li>
 </ul>
 
 <p>New features in 1.2.3</p>
@@ -97,30 +96,30 @@
 <p>New features in 1.2.1</p>
 
 <ul>
-<li><strong>Support for generating CRUD for EMongoDocument models!</strong></li>
+<li><strong>Support for <a href="gii.html#h:gii:crud" title="7. Gii Support">generating CRUD</a> for EMongoDocument models!</strong></li>
 <li>Few minor bug fixes</li>
 </ul>
 
 <p>New features in 1.2</p>
 
 <ul>
-<li>Support for using any other than _id field as a PK</li>
+<li>Support for using any other than <a href="advanced.primary-key.html#h:advanced_primary-key:ownpk" title="6.2. Primary Keys">_id field as a Primary Key</a></li>
 <li>Better names scopes handling, support for default scope</li>
-<li><em>Support to have different models in single collection! see Multimodel collection topic</em></li>
+<li><em>Support to have different models in single collection! see <a href="special.multimodel.html" title="8.1. Multimodel Collections">Multimodel collection topic</a></em></li>
 <li>Better memory management, now there is only one collection object instance, per model</li>
 </ul>
 
 <p>New features in 1.1</p>
 
 <ul>
-<li>automated efficent index definition for collections, per model</li>
+<li><a href="advanced.indexing.html" title="6.1. Indexing">automated efficient index</a> definition for collections, per model</li>
 </ul>
 
 <p>New features in 1.0:</p>
 
 <ul>
-<li>Named scopes just like in AR</li>
-<li>Very easy to use criteria object, you don't have to create complex MongoDB query arrays!</li>
+<li><a href="advanced.named-scopes.html" title="6.3. Named Scopes">Named scopes</a> just like in AR</li>
+<li>Very easy to use <a href="querying.criteria-object.html" title="5.2. The EMongoCriteria Object">criteria object</a>, you don't have to create complex MongoDB query arrays!</li>
 <li>Better exeption handling</li>
 <li>A lot more PHPDocs in code </li>
 </ul>
@@ -134,7 +133,7 @@
 <li>(almost, limited only by MongoDB 4MB limit of single document) endless document embedding/nesting</li>
 <li>Ready to go out-of-box <em>EFFICIENT</em> DataProvider, witch use native php db driver sort, limit and offset features for returning results!</li>
 <li>Records and embedded documents inherit from CModel, so you can use every class witch can handle of CModel (ie: Gii form generator)</li>
-<li>relation support <em>idea/concept/example</em></li>
+<li><a href="advanced.relations.html" title="6.4. Relations">relation support <em>idea/concept/example</em></a></li>
 </ul>
 <dl class="location location-bottom"><dt>2. Changelog<br/><a href="index.html">Table of Contents</a></dt><dd class="prev"><a href="introduction.html">&laquo; Previous</a><br/>1. Introduction</dd><dd class="next"><a href="setup.html">Next &raquo;</a><br/>3. Setup</dd></dl>		</div>
 	

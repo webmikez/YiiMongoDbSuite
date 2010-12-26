@@ -23,15 +23,14 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
-</script>
-</head>
+</script></head>
 <body>
 
 <div id="wrap">
 	<div id="header">
 		<h1>YiiMongoDbSuite Manual 1.3.3</h1>
 		<h2>Setup</h2>
-		<p class="generated">@ 25.12.2010</p>
+		<p class="generated">@ 26.12.2010</p>
 		<p class="location"><a href="index.html"><strong>User manual</strong></a> &raquo; <a href="setup.html">Setup</a></p>
 	</div>
 	
@@ -58,9 +57,13 @@
 <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span></pre>
 
 <ul>
-<li>connectionString: 'localhost' should be changed to the ip or hostname of your host being connected to. For example if connecting to a server it might be <code>'connectionString' =&gt; 'mongodb://username@xxx.xx.xx.xx'</code> where xx.xx.xx.xx is the ip (or hostname) of your webserver or host.</li>
+<li>connectionString: 'localhost' should be changed to the ip or hostname of your host being connected to. For example if connecting
+to a server it might be <code>'connectionString' =&gt; 'mongodb://username@xxx.xx.xx.xx'</code> where xx.xx.xx.xx is the ip (or hostname)
+of your webserver or host.</li>
 <li>dbName: is the name you want the collections to be stored in. The database name.</li>
-<li>fsyncFlag is set to true, this makes mongodb make sure all writes to the database are safely stored to disk. Setting this to false will improve speed but writes are not confirmed. So unless you are doing massive or large imports or save() then it is better to be set to true. See the [performance section][special.performance].</li>
+<li>fsyncFlag is set to true, this makes mongodb make sure all writes to the database are safely stored to disk.
+Setting this to false will improve speed but writes are not confirmed. So unless you are doing massive or large
+imports or save() then it is better to be set to true. See the <a href="special.html#h:special:performance" title="8. Special Topics">performance section</a>.</li>
 <li>safeFlag // TODO</li>
 <li>useCursor flag // TODO</li>
 <li>For more info see the <a href="http://php.net/manual/en/mongo.connecting.php">MongoDB connection page on php.net</a>.</li>
@@ -73,14 +76,6 @@ Short example:</p>
 <span style="color: #000088;">$client</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">first_name</span><span style="color: #339933;">=</span><span style="color: #0000ff;">'something'</span><span style="color: #339933;">;</span>
 <span style="color: #000088;">$client</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">save</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
 <span style="color: #000088;">$clients</span> <span style="color: #339933;">=</span> Client<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">findAll</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
-
-<h3>Resources</h3>
-
-<ul>
-<li><a href="https://github.com/canni/YiiMongoDbSuite/">Project page</a></li>
-<li><a href="http://www.mongodb.org/display/DOCS/Home">MongoDB documentation</a></li>
-<li><a href="http://www.php.net/manual/en/book.mongo.php">PHP MongoDB Driver docs</a></li>
-</ul>
 <dl class="location location-bottom"><dt>3. Setup<br/><a href="index.html">Table of Contents</a></dt><dd class="prev"><a href="changelog.html">&laquo; Previous</a><br/>2. Changelog</dd><dd class="next"><a href="basic.html">Next &raquo;</a><br/>4. Basic Usage</dd></dl>		</div>
 	
 	<div id="footer">
