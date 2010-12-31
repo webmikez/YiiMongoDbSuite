@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="all" />
+
+	<title>Soft Documents Models - YiiMongoDbSuite Manual</title>
+	
+	<link rel="stylesheet" type="text/css" href="design/generic.css" media="all"  />
+	<link rel="stylesheet" type="text/css" href="design/print.css" media="print" />
+	<!--[if lte IE 6]><link rel="stylesheet" href="design/ie.css" type="text/css" /><![endif]-->	
+	<!--[if IE 7]><link rel="stylesheet" href="design/ie7.css" type="text/css" /><![endif]-->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17148216-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head>
+<body>
+
+<div id="wrap">
+	<div id="header">
+		<h1>YiiMongoDbSuite Manual 1.3.4</h1>
+		<h2>Soft Documents Models</h2>
+		<p class="generated">@ 31.12.2010</p>
+		<p class="location"><a href="../index.html"><strong>Home Page</strong></a> &raquo; <a href="index.html"><strong>User manual</strong></a> &raquo; <a href="advanced.html">The Advanced Stuff</a> &raquo; <a href="advanced.soft-models.html">Soft Documents Models</a></p>
+	</div>
+	
+	<div id="content"><dl class="location"><dt><a href="advanced.html">6. The Advanced Stuff</a><br/>6.8. Soft Documents Models</dt><dd class="prev">6.7. GridFS<br/><a href="advanced.gridfs.html">&laquo; Previous</a></dd><dd class="next">7. Gii Support<br/><a href="gii.html">Next &raquo;</a></dd></dl>	<h1>6.8. Soft Documents Models</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>Since the 1.3.4 version you can have models, that do not have fixed attribute list.</p>
+
+<p>The only thing to get started is to define model that extends from <code>EMongoSoftDocument</code></p>
+
+<p>Example:</p>
+
+<pre class="php"><span style="color: #000000; font-weight: bold;">class</span> MixedModel <span style="color: #000000; font-weight: bold;">extends</span> EMongoSoftDocument
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #666666; font-style: italic;">// You still can define a field(s), that always will be defined</span>
+    <span style="color: #666666; font-style: italic;">// like in normal EMongoDocument, but this is optional</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$field</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// As always define the getCollectionName() and model() methods !</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> getCollectionName<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">'mixed_collection'</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> static <span style="color: #000000; font-weight: bold;">function</span> model<span style="color: #009900;">&#40;</span><span style="color: #000088;">$className</span><span style="color: #339933;">=</span><span style="color: #009900; font-weight: bold;">__CLASS__</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> parent<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$className</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre>
+
+<p>And thats it! Now you have model class that will handle of any field lists!</p>
+
+<blockquote class="information">
+  <p>You still can use all features that are present in <code>EMongoDocument</code> because 'EMongoSoftDocument` extends from it.</p>
+</blockquote>
+
+<h3 id="h:advanced_soft-models:usage">Usage:</h3>
+
+<blockquote class="important">
+  <p>You need to init every soft attribute that you want to add to model, by using <code>$model-&gt;initSoftAttribute($attributeName)</code>.</p>
+</blockquote>
+
+<pre class="php"><span style="color: #000088;">$model</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> MixedModel<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">initSoftAttribute</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'field1'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">initSoftAttributes</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'field2'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'field3'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">field</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'regularField'</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">field1</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'value'</span><span style="color: #339933;">;</span>   <span style="color: #666666; font-style: italic;">//  }</span>
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">field2</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'value2'</span><span style="color: #339933;">;</span>  <span style="color: #666666; font-style: italic;">//  } soft attributes, only in this model instance</span>
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">field3</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'value3'</span><span style="color: #339933;">;</span>  <span style="color: #666666; font-style: italic;">//  }</span>
+&nbsp;
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">save</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// Finder will init and populate all soft attributes with values found in particular document automatically</span>
+<span style="color: #000088;">$newModel</span> <span style="color: #339933;">=</span> MixedModel<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$newModel</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">field3</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// will print 'value3'</span></pre>
+<dl class="location location-bottom"><dt>6.8. Soft Documents Models<br/><a href="advanced.html">6. The Advanced Stuff</a></dt><dd class="prev"><a href="advanced.gridfs.html">&laquo; Previous</a><br/>6.7. GridFS</dd><dd class="next"><a href="gii.html">Next &raquo;</a><br/>7. Gii Support</dd></dl>		</div>
+	
+	<div id="footer">
+		<p>Copyright &copy; <a href="http://www.cleverit.com.pl">2010 CleverIT</a></p>
+		<p>Available under the terms of license: <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation License 2.1</a></p>
+		<p>Generated by <strong>TypeFriendly 0.1.4</strong> by <a href="http://www.invenzzia.org/">Invenzzia</a></p>
+	</div>
+</div>
+
+</body>
+</html>

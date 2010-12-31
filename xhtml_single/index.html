@@ -28,12 +28,12 @@
 
 <div id="wrap">
 	<div id="header">
-		<h1>YiiMongoDbSuite Manual 1.3.3</h1>
-		<p class="generated">@ 26.12.2010</p>
+		<h1>YiiMongoDbSuite Manual 1.3.4</h1>
+		<p class="generated">@ 31.12.2010</p>
 		<p class="location"><a href="../index.html"><strong>Home Page</strong></a> &raquo; <a href="index.html"><strong>User manual</strong></a></p>
 	</div>
 	
-	<div id="content"><h1>YiiMongoDbSuite Manual 1.3.3</h1><div class="tf_reference"><table><tr><td><strong>Copyright &copy; 2010 CleverIT</strong></td></tr><tr><td>Available under the terms of license: GNU Free Documentation License 2.1</td></tr><tr><td>Generated: 26.12.2010</td></tr></table><hr/></div><h4 id="toc">Table of Contents</h4><ul class="toc"><li><a href="#toc:introduction">1. Introduction</a></li><li><a href="#toc:changelog">2. Changelog</a></li><li><a href="#toc:setup">3. Setup</a></li><li><a href="#toc:basic">4. Basic Usage</a><ul class="toc"><li><a href="#toc:basic_simple-model">4.1. Simple Model (Document in collection)</a></li><li><a href="#toc:basic_simple-embedded-document">4.2. Simple Embeded Document Model</a></li><li><a href="#toc:basic_embedded-documents">4.3. Embedded Documents</a></li><li><a href="#toc:basic_arrays">4.4. Arrays</a><ul class="toc"><li><a href="#toc:basic_arrays_simple">4.4.1. Simple Arrays</a></li><li><a href="#toc:basic_arrays_embedded-documents">4.4.2. Array of Embedded Documents</a></li></ul></li></ul></li><li><a href="#toc:querying">5. Querying</a><ul class="toc"><li><a href="#toc:querying_simple-queries">5.1. Simple queries</a></li><li><a href="#toc:querying_criteria-object">5.2. The EMongoCriteria Object</a></li></ul></li><li><a href="#toc:advanced">6. The Advanced Stuff</a><ul class="toc"><li><a href="#toc:advanced_indexing">6.1. Indexing</a></li><li><a href="#toc:advanced_primary-key">6.2. Primary Keys</a></li><li><a href="#toc:advanced_named-scopes">6.3. Named Scopes</a></li><li><a href="#toc:advanced_relations">6.4. Relations</a></li><li><a href="#toc:advanced_data-provider">6.5. Data Provider Object</a></li><li><a href="#toc:advanced_write-flags">6.6. Write Queries Flags</a></li><li><a href="#toc:advanced_gridfs">6.7. GridFS</a></li></ul></li><li><a href="#toc:gii">7. Gii Support</a></li><li><a href="#toc:special">8. Special Topics</a><ul class="toc"><li><a href="#toc:special_multimodel">8.1. Multimodel Collections</a></li></ul></li></ul><dl id="toc:introduction" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>1. Introduction</dt><dd class="next">2. Changelog<br/><a href="#toc:changelog">Next &raquo;</a></dd></dl>	<h1>1. Introduction</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This extension is an almost complete, ActiveRecord like support for MongoDB in Yii</p>
+	<div id="content"><h1>YiiMongoDbSuite Manual 1.3.4</h1><div class="tf_reference"><table><tr><td><strong>Copyright &copy; 2010 CleverIT</strong></td></tr><tr><td>Available under the terms of license: GNU Free Documentation License 2.1</td></tr><tr><td>Generated: 31.12.2010</td></tr></table><hr/></div><h4 id="toc">Table of Contents</h4><ul class="toc"><li><a href="#toc:introduction">1. Introduction</a></li><li><a href="#toc:changelog">2. Changelog</a></li><li><a href="#toc:setup">3. Setup</a></li><li><a href="#toc:basic">4. Basic Usage</a><ul class="toc"><li><a href="#toc:basic_simple-model">4.1. Simple Model (Document in collection)</a></li><li><a href="#toc:basic_simple-embedded-document">4.2. Simple Embeded Document Model</a></li><li><a href="#toc:basic_embedded-documents">4.3. Embedded Documents</a></li><li><a href="#toc:basic_arrays">4.4. Arrays</a><ul class="toc"><li><a href="#toc:basic_arrays_simple">4.4.1. Simple Arrays</a></li><li><a href="#toc:basic_arrays_embedded-documents">4.4.2. Array of Embedded Documents</a></li></ul></li></ul></li><li><a href="#toc:querying">5. Querying</a><ul class="toc"><li><a href="#toc:querying_simple-queries">5.1. Simple queries</a></li><li><a href="#toc:querying_criteria-object">5.2. The EMongoCriteria Object</a></li></ul></li><li><a href="#toc:advanced">6. The Advanced Stuff</a><ul class="toc"><li><a href="#toc:advanced_indexing">6.1. Indexing</a></li><li><a href="#toc:advanced_primary-key">6.2. Primary Keys</a></li><li><a href="#toc:advanced_named-scopes">6.3. Named Scopes</a></li><li><a href="#toc:advanced_relations">6.4. Relations</a></li><li><a href="#toc:advanced_data-provider">6.5. Data Provider Object</a></li><li><a href="#toc:advanced_write-flags">6.6. Write Queries Flags</a></li><li><a href="#toc:advanced_gridfs">6.7. GridFS</a></li><li><a href="#toc:advanced_soft-models">6.8. Soft Documents Models</a></li></ul></li><li><a href="#toc:gii">7. Gii Support</a></li><li><a href="#toc:special">8. Special Topics</a><ul class="toc"><li><a href="#toc:special_multimodel">8.1. Multimodel Collections</a></li></ul></li></ul><dl id="toc:introduction" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>1. Introduction</dt><dd class="next">2. Changelog<br/><a href="#toc:changelog">Next &raquo;</a></dd></dl>	<h1>1. Introduction</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This extension is an almost complete, ActiveRecord like support for MongoDB in Yii</p>
 
 <p>It originally started as a fork of <a href="http://www.yiiframework.com/extension/mongorecord" title="MongoRecord">MongoRecord</a>
 extension written by <a href="http://www.yiiframework.com/user/31/" title="tyohan">tyohan</a>,
@@ -87,7 +87,16 @@ to fix some major bugs, and add full featured suite for <a href="http://www.mong
 <li>Jose Martinez and Philippe Gaultier, for implementing and sharing GridFS support</li>
 <li>Nagy Attila Gábor, for big help with new functionality and testing</li>
 </ul>
-<dl id="toc:changelog" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>2. Changelog</dt><dd class="prev">1. Introduction<br/><a href="#toc:introduction">&laquo; Previous</a></dd><dd class="next">3. Setup<br/><a href="#toc:setup">Next &raquo;</a></dd></dl>	<h1>2. Changelog</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This is the 1.3.3 release</p>
+<dl id="toc:changelog" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>2. Changelog</dt><dd class="prev">1. Introduction<br/><a href="#toc:introduction">&laquo; Previous</a></dd><dd class="next">3. Setup<br/><a href="#toc:setup">Next &raquo;</a></dd></dl>	<h1>2. Changelog</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This is the 1.3.4 release (to be released)</p>
+
+<p>New features in 1.3.4</p>
+
+<ul>
+<li>Added "Soft" Documents support, soft documents do not have fixed attribute lists, for more info see <a href="#toc:advanced_soft-models" title="6.8. Soft Documents Models">soft models section</a></li>
+<li>Added support for global temporary folder used by GridFS</li>
+<li>Added missing deleteByPk method to <code>EmongoDocument</code></li>
+<li>Added support for generating Mongo models from existing SQL tables, see <a href="#h:gii:model" title="7. Gii Support">Gii section</a></li>
+</ul>
 
 <p>New features in 1.3.3</p>
 
@@ -957,7 +966,7 @@ reasons, we whant to disable FSync for this models only.</p>
 
 <p>For user comfort, FSync and Safe flags may be set just for single model instance by, <code>$singleModelInstance-&gt;setFsyncFlag(false)</code>,
 this will not affect any other model instance.</p>
-<dl id="toc:advanced_gridfs" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.7. GridFS</dt><dd class="prev">6.6. Write Queries Flags<br/><a href="#toc:advanced_write-flags">&laquo; Previous</a></dd><dd class="next">7. Gii Support<br/><a href="#toc:gii">Next &raquo;</a></dd></dl>	<h1>6.7. GridFS</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>You can use MongoDB GridFS feature to save big files within MongoDB collections.</p>
+<dl id="toc:advanced_gridfs" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.7. GridFS</dt><dd class="prev">6.6. Write Queries Flags<br/><a href="#toc:advanced_write-flags">&laquo; Previous</a></dd><dd class="next">6.8. Soft Documents Models<br/><a href="#toc:advanced_soft-models">Next &raquo;</a></dd></dl>	<h1>6.7. GridFS</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>You can use MongoDB GridFS feature to save big files within MongoDB collections.</p>
 
 <p>The first thing you need to do, it to define model for yours GridFS collection, see example:</p>
 
@@ -1000,7 +1009,17 @@ this will not affect any other model instance.</p>
     <span style="color: #009900;">&#125;</span>
 <span style="color: #009900;">&#125;</span></pre>
 
-<p><strong>IMPORTANT: every EMongoGridFS has a special field "filename", that is mandatory!</strong></p>
+<blockquote class="important">
+  <p>Every EMongoGridFS has a special field "filename", that is mandatory!</p>
+</blockquote>
+
+<!-- # -->
+
+<blockquote class="information">
+  <p><code>EMongoGridFS</code> has a feature that holds files in temporary folder, between operations,
+  it can be set on global level in EMongoDB class, by setting property <code>gridFStemporaryFolder</code> to some dirname,
+  or on model/object level by using <code>gridFStemporaryFolder()</code> setter</p>
+</blockquote>
 
 <p>This part of documentation is not yet complete, for now, follow usage examples:</p>
 
@@ -1101,12 +1120,63 @@ this will not affect any other model instance.</p>
 <span style="color: #666666; font-style: italic;">//write</span>
 &nbsp;
 <span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">write</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
-<dl id="toc:gii" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>7. Gii Support</dt><dd class="prev">6.7. GridFS<br/><a href="#toc:advanced_gridfs">&laquo; Previous</a></dd><dd class="next">8. Special Topics<br/><a href="#toc:special">Next &raquo;</a></dd></dl>	<h1>7. Gii Support</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><h2 id="h:gii:model">Model generation</h2>
+<dl id="toc:advanced_soft-models" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.8. Soft Documents Models</dt><dd class="prev">6.7. GridFS<br/><a href="#toc:advanced_gridfs">&laquo; Previous</a></dd><dd class="next">7. Gii Support<br/><a href="#toc:gii">Next &raquo;</a></dd></dl>	<h1>6.8. Soft Documents Models</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>Since the 1.3.4 version you can have models, that do not have fixed attribute list.</p>
 
-<ul>
-<li>you do not have to generate yours models, yours classes are yours models and schemas!</li>
-<li>Gii CAN'T generate models for you! there is no schema witch gii can exam for generation</li>
-</ul>
+<p>The only thing to get started is to define model that extends from <code>EMongoSoftDocument</code></p>
+
+<p>Example:</p>
+
+<pre class="php"><span style="color: #000000; font-weight: bold;">class</span> MixedModel <span style="color: #000000; font-weight: bold;">extends</span> EMongoSoftDocument
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #666666; font-style: italic;">// You still can define a field(s), that always will be defined</span>
+    <span style="color: #666666; font-style: italic;">// like in normal EMongoDocument, but this is optional</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000088;">$field</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// As always define the getCollectionName() and model() methods !</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> getCollectionName<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">'mixed_collection'</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> static <span style="color: #000000; font-weight: bold;">function</span> model<span style="color: #009900;">&#40;</span><span style="color: #000088;">$className</span><span style="color: #339933;">=</span><span style="color: #009900; font-weight: bold;">__CLASS__</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> parent<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$className</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre>
+
+<p>And thats it! Now you have model class that will handle of any field lists!</p>
+
+<blockquote class="information">
+  <p>You still can use all features that are present in <code>EMongoDocument</code> because 'EMongoSoftDocument` extends from it.</p>
+</blockquote>
+
+<h3 id="h:advanced_soft-models:usage">Usage:</h3>
+
+<blockquote class="important">
+  <p>You need to init every soft attribute that you want to add to model, by using <code>$model-&gt;initSoftAttribute($attributeName)</code>.</p>
+</blockquote>
+
+<pre class="php"><span style="color: #000088;">$model</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> MixedModel<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">initSoftAttribute</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'field1'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">initSoftAttributes</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'field2'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'field3'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">field</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'regularField'</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">field1</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'value'</span><span style="color: #339933;">;</span>   <span style="color: #666666; font-style: italic;">//  }</span>
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">field2</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'value2'</span><span style="color: #339933;">;</span>  <span style="color: #666666; font-style: italic;">//  } soft attributes, only in this model instance</span>
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">field3</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'value3'</span><span style="color: #339933;">;</span>  <span style="color: #666666; font-style: italic;">//  }</span>
+&nbsp;
+<span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">save</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// Finder will init and populate all soft attributes with values found in particular document automatically</span>
+<span style="color: #000088;">$newModel</span> <span style="color: #339933;">=</span> MixedModel<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$newModel</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">field3</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// will print 'value3'</span></pre>
+<dl id="toc:gii" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>7. Gii Support</dt><dd class="prev">6.8. Soft Documents Models<br/><a href="#toc:advanced_soft-models">&laquo; Previous</a></dd><dd class="next">8. Special Topics<br/><a href="#toc:special">Next &raquo;</a></dd></dl>	<h1>7. Gii Support</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><h2 id="h:gii:model">Model generation</h2>
+
+<p>Since version 1.3.4 you can generate mongo document models based on existing SQL tables, just enable gii generators
+provided within package (see below) and use <code>MongoModel</code> generator.</p>
 
 <h2 id="h:gii:crud">CRUD Generation</h2>
 
