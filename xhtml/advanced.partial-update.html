@@ -28,13 +28,13 @@
 
 <div id="wrap">
 	<div id="header">
-		<h1>YiiMongoDbSuite Manual 1.3.5</h1>
+		<h1>YiiMongoDbSuite Manual 1.3.6</h1>
 		<h2>Document Partial Updates</h2>
-		<p class="generated">@ 07.01.2011</p>
+		<p class="generated">@ 28.01.2011</p>
 		<p class="location"><a href="../index.html"><strong>Home Page</strong></a> &raquo; <a href="index.html"><strong>User manual</strong></a> &raquo; <a href="advanced.html">The Advanced Stuff</a> &raquo; <a href="advanced.partial-update.html">Partial updates</a></p>
 	</div>
 	
-	<div id="content"><dl class="location"><dt><a href="advanced.html">6. The Advanced Stuff</a><br/>6.7. Document Partial Updates</dt><dd class="prev">6.6. Write Queries Flags<br/><a href="advanced.write-flags.html">&laquo; Previous</a></dd><dd class="next">6.8. GridFS<br/><a href="advanced.gridfs.html">Next &raquo;</a></dd></dl>	<h1>6.7. Document Partial Updates</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>Since the <code>v1.3.5</code> You can do <em>partial updates</em> of documents.</p>
+	<div id="content"><dl class="location"><dt><a href="advanced.html">6. The Advanced Stuff</a><br/>6.7. Document Partial Updates</dt><dd class="prev">6.6. Write Queries Flags<br/><a href="advanced.write-flags.html">&laquo; Previous</a></dd><dd class="next">6.8. Massive Partial Updates<br/><a href="advanced.partial-batch-update.html">Next &raquo;</a></dd></dl>	<h1>6.7. Document Partial Updates</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>Since the <code>v1.3.5</code> You can do <em>partial updates</em> of documents.</p>
 
 <blockquote class="information">
   <p>Normally this extension, when using <code>EmongoDocument::save()</code> will always <strong>replace</strong> all contents of document
@@ -57,7 +57,7 @@ Mongo <code>$set</code> operator to update only listed fields, see example:</p>
 <span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">update</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'field1'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'field2'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #009900; font-weight: bold;">true</span> <span style="color: #666666; font-style: italic;">/* &lt;- second parameter indicates to use partial update mechanism */</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
 
 <p>And thats it, this will only update those 2 fields, rest in DB will not be touched.</p>
-<dl class="location location-bottom"><dt>6.7. Document Partial Updates<br/><a href="advanced.html">6. The Advanced Stuff</a></dt><dd class="prev"><a href="advanced.write-flags.html">&laquo; Previous</a><br/>6.6. Write Queries Flags</dd><dd class="next"><a href="advanced.gridfs.html">Next &raquo;</a><br/>6.8. GridFS</dd></dl>		</div>
+<dl class="location location-bottom"><dt>6.7. Document Partial Updates<br/><a href="advanced.html">6. The Advanced Stuff</a></dt><dd class="prev"><a href="advanced.write-flags.html">&laquo; Previous</a><br/>6.6. Write Queries Flags</dd><dd class="next"><a href="advanced.partial-batch-update.html">Next &raquo;</a><br/>6.8. Massive Partial Updates</dd></dl>		</div>
 	
 	<div id="footer">
 		<p>Copyright &copy; <a href="http://www.cleverit.com.pl">2011 CleverIT</a></p>

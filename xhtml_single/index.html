@@ -28,12 +28,12 @@
 
 <div id="wrap">
 	<div id="header">
-		<h1>YiiMongoDbSuite Manual 1.3.5</h1>
-		<p class="generated">@ 07.01.2011</p>
+		<h1>YiiMongoDbSuite Manual 1.3.6</h1>
+		<p class="generated">@ 28.01.2011</p>
 		<p class="location"><a href="../index.html"><strong>Home Page</strong></a> &raquo; <a href="index.html"><strong>User manual</strong></a></p>
 	</div>
 	
-	<div id="content"><h1>YiiMongoDbSuite Manual 1.3.5</h1><div class="tf_reference"><table><tr><td><strong>Copyright &copy; 2011 CleverIT</strong></td></tr><tr><td>Available under the terms of license: GNU Free Documentation License 2.1</td></tr><tr><td>Generated: 07.01.2011</td></tr></table><hr/></div><h4 id="toc">Table of Contents</h4><ul class="toc"><li><a href="#toc:introduction">1. Introduction</a></li><li><a href="#toc:changelog">2. Changelog</a></li><li><a href="#toc:setup">3. Setup</a></li><li><a href="#toc:basic">4. Basic Usage</a><ul class="toc"><li><a href="#toc:basic_simple-model">4.1. Simple Model (Document in collection)</a></li><li><a href="#toc:basic_simple-embedded-document">4.2. Simple Embeded Document Model</a></li><li><a href="#toc:basic_embedded-documents">4.3. Embedded Documents</a></li><li><a href="#toc:basic_arrays">4.4. Arrays</a><ul class="toc"><li><a href="#toc:basic_arrays_simple">4.4.1. Simple Arrays</a></li><li><a href="#toc:basic_arrays_embedded-documents">4.4.2. Array of Embedded Documents</a></li></ul></li></ul></li><li><a href="#toc:querying">5. Querying</a><ul class="toc"><li><a href="#toc:querying_simple-queries">5.1. Simple queries</a></li><li><a href="#toc:querying_criteria-object">5.2. The EMongoCriteria Object</a></li></ul></li><li><a href="#toc:advanced">6. The Advanced Stuff</a><ul class="toc"><li><a href="#toc:advanced_indexing">6.1. Indexing</a></li><li><a href="#toc:advanced_primary-key">6.2. Primary Keys</a></li><li><a href="#toc:advanced_named-scopes">6.3. Named Scopes</a></li><li><a href="#toc:advanced_relations">6.4. Relations</a></li><li><a href="#toc:advanced_data-provider">6.5. Data Provider Object</a></li><li><a href="#toc:advanced_write-flags">6.6. Write Queries Flags</a></li><li><a href="#toc:advanced_partial-update">6.7. Document Partial Updates</a></li><li><a href="#toc:advanced_gridfs">6.8. GridFS</a></li><li><a href="#toc:advanced_soft-models">6.9. Soft Documents Models</a></li></ul></li><li><a href="#toc:gii">7. Gii Support</a></li><li><a href="#toc:special">8. Special Topics</a><ul class="toc"><li><a href="#toc:special_multimodel">8.1. Multimodel Collections</a></li></ul></li></ul><dl id="toc:introduction" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>1. Introduction</dt><dd class="next">2. Changelog<br/><a href="#toc:changelog">Next &raquo;</a></dd></dl>	<h1>1. Introduction</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This extension is an almost complete, ActiveRecord like support for MongoDB in Yii</p>
+	<div id="content"><h1>YiiMongoDbSuite Manual 1.3.6</h1><div class="tf_reference"><table><tr><td><strong>Copyright &copy; 2011 CleverIT</strong></td></tr><tr><td>Available under the terms of license: GNU Free Documentation License 2.1</td></tr><tr><td>Generated: 28.01.2011</td></tr></table><hr/></div><h4 id="toc">Table of Contents</h4><ul class="toc"><li><a href="#toc:introduction">1. Introduction</a></li><li><a href="#toc:changelog">2. Changelog</a></li><li><a href="#toc:setup">3. Setup</a></li><li><a href="#toc:basic">4. Basic Usage</a><ul class="toc"><li><a href="#toc:basic_simple-model">4.1. Simple Model (Document in collection)</a></li><li><a href="#toc:basic_simple-embedded-document">4.2. Simple Embeded Document Model</a></li><li><a href="#toc:basic_embedded-documents">4.3. Embedded Documents</a></li><li><a href="#toc:basic_arrays">4.4. Arrays</a><ul class="toc"><li><a href="#toc:basic_arrays_simple">4.4.1. Simple Arrays</a></li><li><a href="#toc:basic_arrays_embedded-documents">4.4.2. Array of Embedded Documents</a></li></ul></li></ul></li><li><a href="#toc:querying">5. Querying</a><ul class="toc"><li><a href="#toc:querying_simple-queries">5.1. Simple queries</a></li><li><a href="#toc:querying_criteria-object">5.2. The EMongoCriteria Object</a></li></ul></li><li><a href="#toc:advanced">6. The Advanced Stuff</a><ul class="toc"><li><a href="#toc:advanced_indexing">6.1. Indexing</a></li><li><a href="#toc:advanced_primary-key">6.2. Primary Keys</a></li><li><a href="#toc:advanced_named-scopes">6.3. Named Scopes</a></li><li><a href="#toc:advanced_relations">6.4. Relations</a></li><li><a href="#toc:advanced_data-provider">6.5. Data Provider Object</a></li><li><a href="#toc:advanced_write-flags">6.6. Write Queries Flags</a></li><li><a href="#toc:advanced_partial-update">6.7. Document Partial Updates</a></li><li><a href="#toc:advanced_partial-batch-update">6.8. Massive Partial Updates</a></li><li><a href="#toc:advanced_gridfs">6.9. GridFS</a></li><li><a href="#toc:advanced_soft-models">6.10. Soft Documents Models</a></li></ul></li><li><a href="#toc:gii">7. Gii Support</a></li><li><a href="#toc:special">8. Special Topics</a><ul class="toc"><li><a href="#toc:special_multimodel">8.1. Multimodel Collections</a></li></ul></li></ul><dl id="toc:introduction" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>1. Introduction</dt><dd class="next">2. Changelog<br/><a href="#toc:changelog">Next &raquo;</a></dd></dl>	<h1>1. Introduction</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This extension is an almost complete, ActiveRecord like support for MongoDB in Yii</p>
 
 <p>It originally started as a fork of <a href="http://www.yiiframework.com/extension/mongorecord" title="MongoRecord">MongoRecord</a>
 extension written by <a href="http://www.yiiframework.com/user/31/" title="tyohan">tyohan</a>,
@@ -87,7 +87,17 @@ to fix some major bugs, and add full featured suite for <a href="http://www.mong
 <li>Jose Martinez and Philippe Gaultier, for implementing and sharing GridFS support</li>
 <li>Nagy Attila Gábor, for big help with new functionality and testing</li>
 </ul>
-<dl id="toc:changelog" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>2. Changelog</dt><dd class="prev">1. Introduction<br/><a href="#toc:introduction">&laquo; Previous</a></dd><dd class="next">3. Setup<br/><a href="#toc:setup">Next &raquo;</a></dd></dl>	<h1>2. Changelog</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This is the <strong>1.3.5</strong> release</p>
+<dl id="toc:changelog" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>2. Changelog</dt><dd class="prev">1. Introduction<br/><a href="#toc:introduction">&laquo; Previous</a></dd><dd class="next">3. Setup<br/><a href="#toc:setup">Next &raquo;</a></dd></dl>	<h1>2. Changelog</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>This is the <strong>1.3.6</strong> release</p>
+
+<p>New features in 1.3.6</p>
+
+<ul>
+<li>Few annoying bugs fixed</li>
+<li>Documentation corrects</li>
+<li><strong>Added <code>EMongoPartialDocument</code> class, that supports full-featured partial loading of documents from DB</strong></li>
+<li><strong>Added fixtures manager, that can replace the Yii default one, and work with Mongo model</strong></li>
+<li><strong>Ability to do massive <a href="#toc:advanced_partial-batch-update" title="6.8. Massive Partial Updates">partial updates of multiple documents</a></strong></li>
+</ul>
 
 <p>New features in 1.3.5</p>
 
@@ -103,7 +113,7 @@ to fix some major bugs, and add full featured suite for <a href="http://www.mong
 <p>New features in 1.3.4</p>
 
 <ul>
-<li>Added "Soft" Documents support, soft documents do not have fixed attribute lists, for more info see <a href="#toc:advanced_soft-models" title="6.9. Soft Documents Models">soft models section</a></li>
+<li>Added "Soft" Documents support, soft documents do not have fixed attribute lists, for more info see <a href="#toc:advanced_soft-models" title="6.10. Soft Documents Models">soft models section</a></li>
 <li>Added support for global temporary folder used by GridFS</li>
 <li>Added missing deleteByPk method to <code>EmongoDocument</code></li>
 <li>Added support for generating Mongo models from existing SQL tables, see <a href="#h:gii:model" title="7. Gii Support">Gii section</a></li>
@@ -137,7 +147,7 @@ to fix some major bugs, and add full featured suite for <a href="http://www.mong
 <p>New features in 1.3</p>
 
 <ul>
-<li>MongoDB <a href="#toc:advanced_gridfs" title="6.8. GridFS">GridFS feature support</a>, thanks to work of: Jose Martinez and Philippe Gaultier</li>
+<li>MongoDB <a href="#toc:advanced_gridfs" title="6.9. GridFS">GridFS feature support</a>, thanks to work of: Jose Martinez and Philippe Gaultier</li>
 </ul>
 
 <p>New features in 1.2.3</p>
@@ -224,7 +234,7 @@ to fix some major bugs, and add full featured suite for <a href="http://www.mong
         <span style="color: #0000ff;">'connectionString'</span>  <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'mongodb://localhost'</span><span style="color: #339933;">,</span>
         <span style="color: #0000ff;">'dbName'</span>            <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'myDatabaseName'</span><span style="color: #339933;">,</span>
         <span style="color: #0000ff;">'fsyncFlag'</span>         <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
-        <span style="color: #0000ff;">'safe'</span>              <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'safeFlag'</span>          <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
         <span style="color: #0000ff;">'useCursor'</span>         <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
     <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
     <span style="color: #666666; font-style: italic;">// ...</span>
@@ -401,7 +411,7 @@ we will show simple User model that will represent documents stored in <code>use
 <li>You can define as many embedded documents as you wish</li>
 <li>Every embedded document <strong>can contain</strong> embedded documents!</li>
 <li>The only limit for this mechanism is that serialized version (in raw array format) of whole document, must not extend the 4 MB size</li>
-<li>For documents bigger than 4 MB see the <a href="#toc:advanced_gridfs" title="6.8. GridFS">GridFS Section</a></li>
+<li>For documents bigger than 4 MB see the <a href="#toc:advanced_gridfs" title="6.9. GridFS">GridFS Section</a></li>
 <li>Main difference between <code>EMongoDocument</code> and EMongoEmbeddedDocument` is that:
 
 <ul>
@@ -977,7 +987,7 @@ reasons, we whant to disable FSync for this models only.</p>
 
 <p>For user comfort, FSync and Safe flags may be set just for single model instance by, <code>$singleModelInstance-&gt;setFsyncFlag(false)</code>,
 this will not affect any other model instance.</p>
-<dl id="toc:advanced_partial-update" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.7. Document Partial Updates</dt><dd class="prev">6.6. Write Queries Flags<br/><a href="#toc:advanced_write-flags">&laquo; Previous</a></dd><dd class="next">6.8. GridFS<br/><a href="#toc:advanced_gridfs">Next &raquo;</a></dd></dl>	<h1>6.7. Document Partial Updates</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>Since the <code>v1.3.5</code> You can do <em>partial updates</em> of documents.</p>
+<dl id="toc:advanced_partial-update" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.7. Document Partial Updates</dt><dd class="prev">6.6. Write Queries Flags<br/><a href="#toc:advanced_write-flags">&laquo; Previous</a></dd><dd class="next">6.8. Massive Partial Updates<br/><a href="#toc:advanced_partial-batch-update">Next &raquo;</a></dd></dl>	<h1>6.7. Document Partial Updates</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>Since the <code>v1.3.5</code> You can do <em>partial updates</em> of documents.</p>
 
 <blockquote class="information">
   <p>Normally this extension, when using <code>EmongoDocument::save()</code> will always <strong>replace</strong> all contents of document
@@ -1000,7 +1010,83 @@ Mongo <code>$set</code> operator to update only listed fields, see example:</p>
 <span style="color: #000088;">$model</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">update</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'field1'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'field2'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #009900; font-weight: bold;">true</span> <span style="color: #666666; font-style: italic;">/* &lt;- second parameter indicates to use partial update mechanism */</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
 
 <p>And thats it, this will only update those 2 fields, rest in DB will not be touched.</p>
-<dl id="toc:advanced_gridfs" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.8. GridFS</dt><dd class="prev">6.7. Document Partial Updates<br/><a href="#toc:advanced_partial-update">&laquo; Previous</a></dd><dd class="next">6.9. Soft Documents Models<br/><a href="#toc:advanced_soft-models">Next &raquo;</a></dd></dl>	<h1>6.8. GridFS</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>You can use MongoDB GridFS feature to save big files within MongoDB collections.</p>
+<dl id="toc:advanced_partial-batch-update" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.8. Massive Partial Updates</dt><dd class="prev">6.7. Document Partial Updates<br/><a href="#toc:advanced_partial-update">&laquo; Previous</a></dd><dd class="next">6.9. GridFS<br/><a href="#toc:advanced_gridfs">Next &raquo;</a></dd></dl>	<h1>6.8. Massive Partial Updates</h1><div class="tf_reference"><table><tr><th>Author</th><td>Philippe Gaultier <pgaultier@gmail.com></td></tr></table><hr/></div><p>Since the <code>v1.3.6</code> You can perform <em>partial updates</em> of multiple documents.</p>
+
+<pre class="php"><span style="color: #666666; font-style: italic;">// prepare modifiers</span>
+<span style="color: #000088;">$modifier</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> EMongoModifier<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">// replace field1 value with 'new value'</span>
+<span style="color: #000088;">$modifier</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addModifier</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'field1'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'set'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'new value'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">// increment field2 value by 1</span>
+<span style="color: #000088;">$modifier</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addModifier</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'field2'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'inc'</span><span style="color: #339933;">,</span> 1<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// prepare search to find documents</span>
+<span style="color: #000088;">$criteria</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> EMongoCriteria<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$criteria</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addCond</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'field3'</span><span style="color: #339933;">,</span><span style="color: #0000ff;">'=='</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'filtered value'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// update all matched documents using the modifiers</span>
+<span style="color: #000088;">$status</span> <span style="color: #339933;">=</span> ModelClass<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">updateAll</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$modifier</span><span style="color: #339933;">,</span> <span style="color: #000088;">$criteria</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> </pre>
+
+<p>And thats it, this will only update those 2 fields (force value of <code>field1</code> and increment value of <code>field2</code>) 
+for all the documents having <code>field3 == 'filtered value'</code>, everything else in the db will remain untouched.</p>
+
+<hr />
+
+<p>Available modifiers are :</p>
+
+<ul>
+<li>inc</li>
+<li>set</li>
+<li>unset</li>
+<li>push</li>
+<li>pushAll</li>
+<li>addToSet</li>
+<li>pop</li>
+<li>pull</li>
+<li>pullAll</li>
+<li>rename</li>
+</ul>
+
+<p>You can find detailed explanation about usage of those modifiers 
+on the original <a href="http://www.mongodb.org/display/DOCS/Updating" title="MongoDB.org">MongoDb documentation</a>.</p>
+
+<hr />
+
+<p>EMongoModifier can be defined during creation :</p>
+
+<pre class="php"><span style="color: #666666; font-style: italic;">// prepare modifiers</span>
+<span style="color: #000088;">$modifier</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> EMongoModifier<span style="color: #009900;">&#40;</span>
+    <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+        <span style="color: #0000ff;">'fieldName1'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'inc'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$incValue</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'fieldName2'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'set'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$targetValue</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'fieldName3'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'unset'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'fieldName4'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'push'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$pushedValue</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'fieldName5'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'pushAll'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$pushedValue1</span><span style="color: #339933;">,</span> <span style="color: #000088;">$pushedValue2</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'fieldName6'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'addToSet'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$addedValue</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'fieldName7'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'pop'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'fieldName8'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'pop'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'fieldName9'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'pull'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$removedValue</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'fieldName10'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'pullAll'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$removedValue1</span><span style="color: #339933;">,</span> <span style="color: #000088;">$removedValue2</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'fieldName11'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'rename'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$newFieldName</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+
+<p>, during execution</p>
+
+<pre class="php"><span style="color: #000088;">$modifier</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> EMongoModifier<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$modifier</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addCond</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$fieldName1</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'inc'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$incValue</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<span style="color: #000088;">$modifier</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addCond</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$fieldName2</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'set'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$targetValue</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<span style="color: #000088;">$modifier</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addCond</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$fieldName3</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'unset'</span><span style="color: #339933;">,</span> 1<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<span style="color: #000088;">$modifier</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addCond</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$fieldName4</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'push'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$pushedValue</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<span style="color: #000088;">$modifier</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addCond</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$fieldName5</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'pushAll'</span><span style="color: #339933;">,</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$pushedValue1</span><span style="color: #339933;">,</span> <span style="color: #000088;">$pushedValue2</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<span style="color: #000088;">$modifier</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addCond</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$fieldName6</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'addToSet'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$addedValue</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<span style="color: #000088;">$modifier</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addCond</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$fieldName7</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'pop'</span><span style="color: #339933;">,</span> 1<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<span style="color: #000088;">$modifier</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addCond</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$fieldName8</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'pop'</span><span style="color: #339933;">,</span> <span style="color: #339933;">-</span>1<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<span style="color: #000088;">$modifier</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addCond</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$fieldName9</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'pull'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$removedValue</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<span style="color: #000088;">$modifier</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addCond</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$fieldName10</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'pullAll'</span><span style="color: #339933;">,</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$removedValue1</span><span style="color: #339933;">,</span> <span style="color: #000088;">$removedValue2</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<span style="color: #000088;">$modifier</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addCond</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$fieldName11</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'rename'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$newFieldName</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span></pre>
+
+<p>or using the two methods</p>
+<dl id="toc:advanced_gridfs" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.9. GridFS</dt><dd class="prev">6.8. Massive Partial Updates<br/><a href="#toc:advanced_partial-batch-update">&laquo; Previous</a></dd><dd class="next">6.10. Soft Documents Models<br/><a href="#toc:advanced_soft-models">Next &raquo;</a></dd></dl>	<h1>6.9. GridFS</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>You can use MongoDB GridFS feature to save big files within MongoDB collections.</p>
 
 <p>The first thing you need to do, it to define model for yours GridFS collection, see example:</p>
 
@@ -1154,7 +1240,7 @@ Mongo <code>$set</code> operator to update only listed fields, see example:</p>
 <span style="color: #666666; font-style: italic;">//write</span>
 &nbsp;
 <span style="color: #000088;">$image</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">write</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
-<dl id="toc:advanced_soft-models" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.9. Soft Documents Models</dt><dd class="prev">6.8. GridFS<br/><a href="#toc:advanced_gridfs">&laquo; Previous</a></dd><dd class="next">7. Gii Support<br/><a href="#toc:gii">Next &raquo;</a></dd></dl>	<h1>6.9. Soft Documents Models</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>Since the 1.3.4 version you can have models, that do not have fixed attribute list.</p>
+<dl id="toc:advanced_soft-models" class="location location-middle"><dt><a href="#toc:advanced">6. The Advanced Stuff</a><br/>6.10. Soft Documents Models</dt><dd class="prev">6.9. GridFS<br/><a href="#toc:advanced_gridfs">&laquo; Previous</a></dd><dd class="next">7. Gii Support<br/><a href="#toc:gii">Next &raquo;</a></dd></dl>	<h1>6.10. Soft Documents Models</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><p>Since the 1.3.4 version you can have models, that do not have fixed attribute list.</p>
 
 <p>The only thing to get started is to define model that extends from <code>EMongoSoftDocument</code></p>
 
@@ -1207,7 +1293,7 @@ Mongo <code>$set</code> operator to update only listed fields, see example:</p>
 <span style="color: #000088;">$newModel</span> <span style="color: #339933;">=</span> MixedModel<span style="color: #339933;">::</span><span style="color: #004000;">model</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
 &nbsp;
 <span style="color: #b1b100;">echo</span> <span style="color: #000088;">$newModel</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">field3</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// will print 'value3'</span></pre>
-<dl id="toc:gii" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>7. Gii Support</dt><dd class="prev">6.9. Soft Documents Models<br/><a href="#toc:advanced_soft-models">&laquo; Previous</a></dd><dd class="next">8. Special Topics<br/><a href="#toc:special">Next &raquo;</a></dd></dl>	<h1>7. Gii Support</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><h2 id="h:gii:model">Model generation</h2>
+<dl id="toc:gii" class="location location-middle"><dt><a href="#toc">Table of Contents</a><br/>7. Gii Support</dt><dd class="prev">6.10. Soft Documents Models<br/><a href="#toc:advanced_soft-models">&laquo; Previous</a></dd><dd class="next">8. Special Topics<br/><a href="#toc:special">Next &raquo;</a></dd></dl>	<h1>7. Gii Support</h1><div class="tf_reference"><table><tr><th>Author</th><td>Dariusz Górecki <darek.krk@gmail.com></td></tr></table><hr/></div><h2 id="h:gii:model">Model generation</h2>
 
 <p>Since version 1.3.4 you can generate mongo document models based on existing SQL tables, just enable gii generators
 provided within package (see below) and use <code>MongoModel</code> generator.</p>
@@ -1334,7 +1420,7 @@ EMongoCursor implements Iterator interface and can be used with ie. foreach loop
     <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> defaultScope<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
     <span style="color: #009900;">&#123;</span>
         <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
-            <span style="color: #0000ff;">'conditions'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'type'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'=='</span><span style="color: #339933;">,</span> <span style="color: #000000; font-weight: bold;">self</span><span style="color: #339933;">::</span><span style="color: #004000;">NORMAL_CLIENT</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+            <span style="color: #0000ff;">'conditions'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'type'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'=='</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000000; font-weight: bold;">self</span><span style="color: #339933;">::</span><span style="color: #004000;">NORMAL_CLIENT</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
         <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
     <span style="color: #009900;">&#125;</span>
 &nbsp;
@@ -1361,7 +1447,7 @@ EMongoCursor implements Iterator interface and can be used with ie. foreach loop
     <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> defaultScope<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
     <span style="color: #009900;">&#123;</span>
         <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
-            <span style="color: #0000ff;">'conditions'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'type'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'=='</span><span style="color: #339933;">,</span> <span style="color: #000000; font-weight: bold;">self</span><span style="color: #339933;">::</span><span style="color: #004000;">BUSINESS_CLIENT</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+            <span style="color: #0000ff;">'conditions'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'type'</span><span style="color: #339933;">=&gt;</span>array<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'=='</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000000; font-weight: bold;">self</span><span style="color: #339933;">::</span><span style="color: #004000;">BUSINESS_CLIENT</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
         <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
     <span style="color: #009900;">&#125;</span>
 &nbsp;
