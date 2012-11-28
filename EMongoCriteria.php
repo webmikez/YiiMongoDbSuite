@@ -62,7 +62,8 @@ class EMongoCriteria extends CComponent
 		'equals'		=> '$$eq',
 		'eq'			=> '$$eq',
 		'=='			=> '$$eq',
-		'where'			=> '$where'
+		'where'			=> '$where',
+        'or'            => '$or'
 	);
 
 	const SORT_ASC		= 1;
@@ -442,4 +443,15 @@ class EMongoCriteria extends CComponent
 
 		return $this;
 	}
+
+    public function addOrCond($fieldName, $value)
+    {
+        $op = self::$operators['or'];
+
+        $value = !is_array($value) ? array($value) : $value;
+        foreach($value as $cond) {
+            $this->_conditions[$op][] = array($fieldName => $cond);
+        }
+        return $this;
+    }
 }
