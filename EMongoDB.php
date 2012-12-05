@@ -108,6 +108,8 @@ class EMongoDB extends CApplicationComponent
 	 */
 	public $gridFStemporaryFolder = null;
 
+    public $enableProfiling = false;
+
 	/**
 	 * Connect to DB if connection is already connected this method doeas nothing
 	 * @since v1.0
