@@ -818,9 +818,9 @@ abstract class EMongoDocument extends EMongoEmbeddedDocument
 	{
 		Yii::trace(get_class($this).'.find()','ext.MongoDb.EMongoDocument');
 
-        if($this->getDb()->enableProfiling) {
-            Yii::beginProfile('ext.MongoDb.EMongoDocument.find('.json_encode($criteria->getConditions()).')','ext.MongoDb.EMongoDocument.find');
-        }
+//        if($this->getDb()->enableProfiling) {
+//            Yii::beginProfile('ext.MongoDb.EMongoDocument.find('.json_encode($criteria->getConditions()).')','ext.MongoDb.EMongoDocument.find');
+//        }
 
 		if($this->beforeFind())
 		{
@@ -830,9 +830,9 @@ abstract class EMongoDocument extends EMongoEmbeddedDocument
 
 			return $this->populateRecord($doc);
 		}
-        if($this->getDb()->enableProfiling) {
-            Yii::endProfile('ext.MongoDb.EMongoDocument.find('.json_encode($criteria->getConditions()).')','ext.MongoDb.EMongoDocument.find');
-        }
+//        if($this->getDb()->enableProfiling) {
+//            Yii::endProfile('ext.MongoDb.EMongoDocument.find('.json_encode($criteria->getConditions()).')','ext.MongoDb.EMongoDocument.find');
+//        }
 		return null;
 	}
 
@@ -853,9 +853,9 @@ abstract class EMongoDocument extends EMongoEmbeddedDocument
 
 			$cursor = $this->getCollection()->find($criteria->getConditions());
 
-            if($this->getDb()->enableProfiling) {
-                Yii::beginProfile('ext.MongoDb.EMongoDocument.findAll('.var_export($cursor->info(), true).')','ext.MongoDb.EMongoDocument.find');
-            }
+//            if($this->getDb()->enableProfiling) {
+//                Yii::beginProfile('ext.MongoDb.EMongoDocument.findAll('.var_export($cursor->info(), true).')','ext.MongoDb.EMongoDocument.find');
+//            }
 
 			if($criteria->getSort() !== null)
 				$cursor->sort($criteria->getSort());
@@ -866,9 +866,9 @@ abstract class EMongoDocument extends EMongoEmbeddedDocument
 			if($criteria->getSelect())
 				$cursor->fields($criteria->getSelect(true));
 
-            if($this->getDb()->enableProfiling) {
-                Yii::beginProfile('ext.MongoDb.EMongoDocument.findAll('.var_export($cursor->info(), true).')','ext.MongoDb.EMongoDocument.find');
-            }
+//            if($this->getDb()->enableProfiling) {
+//                Yii::beginProfile('ext.MongoDb.EMongoDocument.findAll('.var_export($cursor->info(), true).')','ext.MongoDb.EMongoDocument.find');
+//            }
 
 			if($this->getUseCursor())
 				return new EMongoCursor($cursor, $this->model());
@@ -969,15 +969,8 @@ abstract class EMongoDocument extends EMongoEmbeddedDocument
 
 		$this->applyScopes($criteria);
 
-        if($this->getDb()->enableProfiling) {
-            Yii::beginProfile('ext.MongoDb.EMongoDocument.count('.json_encode($criteria->getConditions()).')','ext.MongoDb.EMongoDocument.count');
-        }
-
         $rc = $this->getCollection()->count($criteria->getConditions());
 
-        if($this->getDb()->enableProfiling) {
-            Yii::beginProfile('ext.MongoDb.EMongoDocument.count('.json_encode($criteria->getConditions()).')','ext.MongoDb.EMongoDocument.count');
-        }
 		return $rc;
 	}
 
