@@ -48,6 +48,19 @@ class EMongoDB extends CApplicationComponent
     public $persistentConnection = false;
 
     /**
+    * true or string(mongo set replica "set" name)
+    * @link http://php.net/manual/en/mongo.construct.php
+    * @var string $replicaSet The name of the replica set to connect to.
+    */
+    public $replicaSet = false;
+
+    /**
+    *
+    * @var for Mongo php extends 1.3.2
+    */
+    public $readPreference = null;
+
+    /**
      * @var string $dbName name of the Mongo database to use
      * @since v1.0
      */
@@ -137,15 +150,23 @@ class EMongoDB extends CApplicationComponent
 				if(empty($this->connectionString))
 					throw new EMongoException(Yii::t('yii', 'EMongoDB.connectionString cannot be empty.'));
 
-				if($this->persistentConnection !== false)
-					$this->_mongoConnection = new Mongo($this->connectionString, array(
-						'connect'=>$this->autoConnect,
-						'persist'=>$this->persistentConnection
-					));
+                $options = array('connect'=>$this->autoConnect);
+                if ($this->replicaSet !== false) {
+                    $options['replicaSet'] = $this->replicaSet;
+                }
+                if (class_exists('MongoClient', false) && $this->persistentConnection !== false) {
+                    $options['persist'] = $this->persistentConnection;
+                }
+                if (class_exists('MongoClient', false)) // for php Mongo extends: PECL mongoclient >=1.3.0.
+                {
+                    // Read priorities from slave
+                    if ($this->readPreference === null) {
+                        $options['readPreference'] = MongoClient::RP_SECONDARY_PREFERRED;
+                    }
+                    $this->_mongoConnection = new MongoClient($this->connectionString, $options);
+                }
 				else
-					$this->_mongoConnection = new Mongo($this->connectionString, array(
-						'connect'=>$this->autoConnect,
-					));
+                    $this->_mongoConnection = new Mongo($this->connectionString, $options);
 
 				return $this->_mongoConnection;
 			}
