@@ -54,6 +54,10 @@ class EMongoDB extends CApplicationComponent
     */
     public $replicaSet = false;
 
+    public $connectTimeoutMS = 5000;
+
+    public $socketTimeoutMS = 5000;
+
     /**
     *
     * @var for Mongo php extends 1.3.2
@@ -154,15 +158,16 @@ class EMongoDB extends CApplicationComponent
                 if ($this->replicaSet !== false) {
                     $options['replicaSet'] = $this->replicaSet;
                 }
-                if (class_exists('MongoClient', false) && $this->persistentConnection !== false) {
-                    $options['persist'] = $this->persistentConnection;
-                }
+
+
                 if (class_exists('MongoClient', false)) // for php Mongo extends: PECL mongoclient >=1.3.0.
                 {
                     // Read priorities from slave
                     if ($this->readPreference === null) {
                         $options['readPreference'] = MongoClient::RP_SECONDARY_PREFERRED;
                     }
+                    $options['connectTimeoutMS'] = $this->connectTimeoutMS;
+                    $options['socketTimeoutMS'] = $this->socketTimeoutMS;
                     $this->_mongoConnection = new MongoClient($this->connectionString, $options);
                 }
 				else

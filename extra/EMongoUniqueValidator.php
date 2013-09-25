@@ -27,6 +27,12 @@ class EMongoUniqueValidator extends CValidator
 		if($this->allowEmpty && ($value === null || $value === ''))
 			return;
 
+
+        $class = new ReflectionClass($object);
+        if($attributesMap = $class->getStaticPropertyValue('attributesMap')) {
+            $attribute = isset($attributesMap[$attribute]) ? $attributesMap[$attribute] : $attribute;
+        }
+
 		$criteria = new EMongoCriteria;
 		$criteria->{$attribute} = $value;
 		$count = $object->model()->count($criteria);
