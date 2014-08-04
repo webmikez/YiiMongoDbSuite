@@ -24,12 +24,9 @@ class EMongoUniqueValidator extends CValidator
 	public function validateAttribute($object, $attribute)
 	{
 		$value = $object->{$attribute};
-		if($this->allowEmpty && ($value === null || $value === ''))
-			return;
+		if($this->allowEmpty && ($value === null || $value === ''))	return;
 
-
-        $class = new ReflectionClass($object);
-        if($attributesMap = $class->getStaticPropertyValue('attributesMap')) {
+        if($attributesMap = $object->getAttributesMap()) {
             $attribute = isset($attributesMap[$attribute]) ? $attributesMap[$attribute] : $attribute;
         }
 
